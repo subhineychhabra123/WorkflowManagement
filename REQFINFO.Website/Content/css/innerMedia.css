@@ -1,0 +1,50 @@
+﻿@media screen and (max-width:480px) {
+
+    .row.paddingLeft {
+    margin-left: -11px;
+    width: 385px;
+}
+
+.section_input textarea {
+   max-width: 91%;
+}
+.defaul_margin{
+    margin-top: -22px !important;
+}
+.custom-alert-dismissable,
+.custom-alert-dismissible {
+    padding-right: 7px;
+}
+    .custom-alert-dismissable .closeButton,
+    .custom-alert-dismissible .closeButton {
+        position: relative;
+        top: -2px;
+        right: -1334px;
+        color: inherit;
+    }
+    .log_form span {
+  
+    padding-left: 0px !important;
+}
+
+    .forgot_password_message {
+        margin-left: 12px !important;
+    }
+    .forgot_password_tempMessage{
+        margin-left: 0px !important;
+    }
+
+}
+@media screen and (max-width: 768px) {
+.log_form span {
+    padding-left: 0px !important;
+}
+
+/*.custome-alert {
+    width: 85%;
+}*/
+.marginHeight{
+    width:98% !important;
+}
+
+}

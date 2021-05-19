@@ -1,0 +1,224 @@
+@media screen and (max-width:480px) {
+    .mrgin_btm {
+        margin-bottom: 12px;
+    }
+    .notificationmsg.dropdown-menu.widget-messages-alt.no-padding {
+    margin-right: -92px;
+}
+    .envelop_margin {
+    margin-right: 9px;
+}
+    .adminMessageCount {
+   background: none repeat scroll 0 0 #f3797f;
+  border-radius: 50%;
+  color: #fefefe;
+  font: -moz-info;
+  height: 1px;
+  position: absolute;
+  right: auto;
+  text-align: center;
+  top: -7px;
+  width: auto;
+  line-height: 1;
+  padding: 0px 4px 16px 4px;
+  margin: 0 7px;
+  font:-moz-field;
+}
+    .shortListMargin {
+    margin-top: 0;
+}
+    .section_input textarea {
+        width: 91%;
+    }
+
+    .col-md-5.col-sm-5.col-xs-11.date_margin.startdate.custome-datepicker.hasDatepicker {
+        margin-left: 0;
+        margin-top: 26px;
+    }
+
+    .anchors {
+        margin-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .paddingright {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .appli_section {
+        margin-bottom: 0px;
+    }
+
+    .media_h1 {
+        font-size: 13px;
+    }
+
+    .section_input.overflowVisible {
+        overflow: visible;
+    }
+    .h2_terms {
+    font-size: 20px;   
+}
+.indexxx_txt2 {  
+    font-size: 13px;
+    line-height: 26px;
+    padding: 30px 0;
+}
+tspan{
+    font-size:10px;
+}
+}
+
+@media screen and (max-width: 766px) {
+    .logo {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 20px;
+        vertical-align: bottom;
+    }
+    .shortListMargin {
+    margin-bottom: 34px;
+}
+
+    .section_input.overflowVisible {
+        overflow: visible;
+    }
+
+    .form_section {
+        min-height: 400px;
+    }
+    .notificationmsg{
+        right:43px;
+    }
+    .navbar-nav {
+        margin: 7.5px 8px;
+    }
+
+    .menu {
+        float: right;
+        position: absolute;
+        right: 60px;
+        top: 13px;
+    }
+
+    .box_job {
+        color: #434345;
+        padding-left: 45px;
+        padding-right: 42px;
+    }
+
+    #searchResults ul li span {
+        display: block;
+    }
+
+    .nopaddingbuttons {
+        padding-left: 0px;
+    }
+
+    .job_section span {
+        display: block;
+        font-size: 32px;
+        padding-top: 0;
+    }
+
+    .padding_lefft {
+        padding-left: 45px;
+    }
+
+    .marginn_top {
+        margin-top: 0;
+    }
+
+    .col-md-11.paddingleft {
+        margin-bottom: 20px;
+    }
+
+    .job_section {
+        min-height: 650px;
+    }
+
+    .col-md-11.paddingleft {
+        padding-left: 30px;
+    }
+
+    .logo_section {
+        min-height: 20px;
+        clear: both;
+    }
+
+    .log_form {
+        margin-top: 15px;
+        padding: 20px;
+    }
+
+        .log_form span {
+            display: block;
+            margin-top: 10px;
+        }
+
+    .box1 {
+        overflow: hidden;
+        padding-bottom: 30px;
+        padding-left: 42px;
+    }
+
+    .blog #image {
+        display: inline-block;
+        height: 49px;
+        margin-right: 10px;
+        width: 80px;
+    }
+
+
+
+    #image {
+        background-color: #434345;
+    }
+
+    .blog p {
+        padding-right: 0;
+    }
+
+    #clipBoard span {
+        color: #f3797f;
+        font-size: 26px;
+    }
+
+    #connections #smaller {
+        display: inline-block;
+        max-width: 80px;
+    }
+
+    #connections #bigger {
+    }
+
+    #clipBoard a {
+        color: #434345;
+        font-size: 25px;
+        line-height: 33px;
+    }
+
+    .navbar-default {
+        min-height: 20px;
+    }
+}
+@media screen and (max-width:580px) {
+.indexxx_txt2{
+font-size: 12px;
+}
+}
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 1024px) {
+    .logo_section {
+        clear: both;
+    }
+    .box1 {
+        padding-left: 42px;
+    }
+    .section_input.overflowVisible {
+        overflow: visible;
+    }
+}

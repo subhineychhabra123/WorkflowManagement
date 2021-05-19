@@ -1,0 +1,152 @@
+html, body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #EAEFF2;
+    min-width: 480px;
+}
+img {text-decoration: none; border: 0px}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+#applyPopUp{
+    margin: 4%;
+}
+form input,select {
+    border: 0px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 44px;
+    margin-top: 4px;
+    font-size: 34px;
+    font-family: BrandonGrotesque-MediumItalic;
+	font-weight: normal;
+	font-style: normal;
+    padding-left: 12px;
+    color: #434345;
+    outline: none;
+}
+textarea{
+    height: 100px;
+    width: 420px;
+    min-width: 420px;
+    min-height: 100px;
+    max-width: 500px;
+    max-height: 200px;
+    border: 0px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 44px;
+    margin-top: 4px;
+    font-size: 32px;
+    font-family: BrandonGrotesque-LightItalic;
+	font-weight: normal;
+	font-style: normal;
+    padding-left: 12px;
+    color: #434345;
+    outline: none;
+}
+#title{
+    font-family: BrandonGrotesque-Medium;
+	font-weight: normal;
+	font-style: normal;
+    font-size: 32px;
+    color: #434345;
+    line-height: 38px;
+}
+#title span{
+    font-family: BrandonGrotesque-Light;
+	font-weight: normal;
+	font-style: normal;
+}
+#applyButton{
+    background-color: #F3797F;
+    color: white;
+    font-family: BrandonGrotesque-Medium;
+	font-weight: normal;
+	font-style: normal;
+    height: 48px;
+    margin-top: 24px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-align: left;
+}
+#resumeButton{
+    color: white;
+    font-family: BrandonGrotesque-Medium;
+	font-weight: normal;
+	font-style: normal;
+    height: 48px;
+    width: 434px;
+    text-align: left;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+h4{
+    font-family: BrandonGrotesque-Bold;
+	font-weight: normal;
+	font-style: normal;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #434345;
+    margin-top: 0px;
+}
+form #applyNameInput{
+    background-color: #EAEFF2;
+    padding-left: 0px;
+}
+form #input{
+    width: 200px;
+    display: inline-block;
+}
+#errorMessages{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-family: BrandonGrotesque-Regular;
+	font-weight: normal;
+	font-style: normal;
+    color: #F3797F;
+}
+@media only screen and (max-device-width: 667px) {
+    #title{
+        font-size: 110px;
+        line-height: 120%;
+        padding-bottom: 60px;
+    }
+    #resumeButton{
+        background-color: #434345;
+        height: 120px;
+        width: 100%;
+    }
+    #applyButton{
+        height: 120px;
+        width: 100%;
+    }
+    form #input{
+        width: 70%;
+    }
+    #errorMessages{
+        font-size: 50px;
+    }
+    h4{
+        font-size: 40px;
+    }
+    form input,select {
+        height: 80px;
+        font-size: 80px;
+        padding-left: 40px;
+    }
+    textarea{
+        font-size: 60px;
+        height: 400px;
+        width: 100%;
+        padding-left: 40px;
+        max-height: none;
+        max-width: none;
+    }
+}

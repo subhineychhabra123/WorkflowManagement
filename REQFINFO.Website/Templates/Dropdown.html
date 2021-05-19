@@ -1,0 +1,17 @@
+﻿<label class="control-label col-sm-4">{{DataObj.Label}}</label>
+
+<div class="col-sm-6">
+    <select class="form-control" data-ng-options="item.IDCustomLookup as item.Val1 for item in DataObj.CustomLookupModel" ng-init="DataObj.Val1=convertInt(DataObj.Val1)" ng-model="DataObj.Val1">
+        <option value="" >Please Selected</option>
+       
+    </select>
+    
+</div>
+<div class="col-sm-2"></div>
+
+
+
+
+<!--<span class="msg-validation" ng-if="Mandatory">
+    <span data-valmsgfor="{{UniqueId}}">{{ParameterName}} field is required.</span>
+</span>-->

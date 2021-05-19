@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Projects";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+
+
+
+<script src="~/Scripts/Controllers/ProjectController.js"></script>
+<div class="main-content"  ng-app="ProjectApp">
+    <div class="container" ng-controller="ProjectCtlr" ng-init="projectInitializer('@ViewBag.WorkFLowID')">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-content">
+                    <div class="theme-title">
+                           <div class="theme-title-border">
+                        <i class="fa fa-clipboard"></i><span>{{WorkFlowName}} > Projects</span>
+                               </div>
+                    </div>
+                    <div class="white-area">
+                        <div class="row">
+
+
+                            <div ng-if="Projects.length === 0" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
+                                <span class="Emptymsg">No Record Found  </span>
+                            </div>
+                        </div>
+                    
+
+                         
+
+                        <div ng-repeat="ProjectsObj in Projects" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                          <a href="/GIGCommunicationLog/{{ProjectsObj.IDUPW}}/{{ProjectsObj.IDProject}}" >
+                              <div class="panel-project">
+                                <div class="fa large-icon fa-clipboard"></div>
+                                <div class="panel-title">
+                                    <i class="fa fa-clipboard"></i>
+                                    <span>{{ProjectsObj.Name}} </span>
+                                    <br />
+                                     <span>{{ProjectsObj.Description}} </span>
+                                  
+                                </div>
+                                  
+                                <div class="panel-content">
+                                </div>
+                                  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

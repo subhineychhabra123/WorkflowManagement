@@ -1,0 +1,128 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Reqfinfo</title>
+    <!-- Bootstrap -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+       <link href="~/Content/css/familyFonts.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/reqfinfo-theme.css">
+    <link rel="stylesheet" href="~/Content/css/reqfinfo-theme-responsive.css">
+    <link rel="shortcut icon" href="~/Content/images/favicon.png">
+    <link href="~/Content/css/Developer.css" rel="stylesheet" />
+           <link href="~/Content/css/jquery.validate.mvc.css" rel="stylesheet" />
+    
+    
+    <script src="~/Content/js/jquery.min.js"></script>
+
+     <script src="~/Content/js/jquery.validate.js"></script>
+
+    <script src="~/Content/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/js/jquery.unobtrusive-ajax.min.js"></script>
+    
+
+    <script src="~/Content/js/jquery.validate.mvc.js"></script>
+
+    <script src="~/Content/js/responsive-table-ul-main.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+      <script src="~/Content/js/bootbox.js"></script>
+
+    <script src="~/Scripts/js/Common.js"></script>
+
+
+    <script src="~/Scripts/angular.js"></script>
+       <script src="~/Scripts/Controllers/pagination.js"></script>
+
+
+    <script src="~/Scripts/Controllers/LogoutController.js"></script>
+   
+</head>
+<body >
+    <div class="wrapper">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="javascript:void(0)">
+                                <img src="~/Content/images/logo.png"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 navbar-right-background">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right navbar-theme-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                        @if (SessionManagement.LoggedInUser.IDUser != null)
+                                        {
+                                            @SessionManagement.LoggedInUser.FullName
+                                        }
+
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu theme-menu-dropdown">
+                                       <li>
+                                            @using (Html.BeginForm("LogOff", "User", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()                                      
+                                            <a onclick="$(this).closest('form').submit();" class="Logoutli">Logout</a>
+                                        }
+                                           </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+            </div>
+        </nav>
+        <div class="theme-breadcrumb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <ol class="breadcrumb breadcrumb-theme">
+                            <li>Home    </li>
+                            <li class="active">Workflow</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @RenderBody()
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        &copy; copyrights 2015 reqfinfo.com
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Pricacy</a></li>
+                            <li><a href="#">Terms</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <div class="clearfix"></div>
+    </div>
+
+
+     
+ 
+
+</body>
+</html>

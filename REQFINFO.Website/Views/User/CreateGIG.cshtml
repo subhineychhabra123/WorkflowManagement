@@ -1,0 +1,239 @@
+﻿@model   REQFINFO.Website.Models.UserXProjectXWorkFlowUserGroupVM
+@{
+    ViewBag.Title = "CreateGIG";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+<script src="~/Scripts/jquery-ui.js"></script>
+<script src="~/Content/js/jquery.uploadfile.js"></script>
+<script src="~/Content/js/jquery.fileupload.js"></script>
+<link href="~/Content/css/fileupload.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="~/Scripts/angular-validation.js"></script>
+<script src="~/Scripts/angular-validation-rule.js"></script>
+
+<script src="~/Scripts/Controllers/CreateGig.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<script>
+
+    $(function () {
+      
+        $(".validation-invalid").tooltipValidation({
+            placement: "top",
+
+        });
+       
+    });
+
+</script>
+
+<div class="wrapper" ng-app="GIGCreateApp">
+    <div class="main-content"  ng-controller="GIGCreateCtlr" ng-init="GIGInitializer('@ViewBag.IDUPW','@ViewBag.IDProject','@ViewBag.IDLevelXFunction','@ViewBag.IDWorkflowUserGroup')">
+        <form name="myForm"  >
+
+         
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-content">
+                            <div class="theme-title">
+                                <div class="theme-title-border">
+                                    <i class="fa fa-file-text-o"></i><span>Create @Model.WorkflowDisplayName</span>
+                                </div>
+                            </div>
+                            <div class="white-area">
+
+                                <div class="">
+                                    <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4">Project Number</label>
+                                            <div class="col-sm-6">
+                                                <div class="label-content">
+                                                    {{UserXProjectXWorkFlowUserGroupVM.ProjectName}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div >
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">@Model.WorkflowDisplayName Number</label>
+                                                <div class="col-sm-6">
+                                                    <input class="form-control " maxlength="255" type="text" name="GIGNumber" required-error-message="@Model.WorkflowDisplayName Number is required." validator="required"   ng-model="GIGNumber"   />
+
+
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Group Name</label>
+                                                <div class="col-sm-6">
+                                                    <div class="label-content">
+                                                        {{GroupName}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2"></div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Detail</label>
+                                                <div class="col-sm-6">
+                                                    <textarea class="form-control "   name="LifeCycleDetail" required-error-message="Detail is required." validator="required"   ng-model="LifeCycleDetail" ></textarea>
+
+
+                                                </div>
+
+                                            </div>
+
+
+                                            @**@
+                                            <div class="form-group" ng-show="LevelVM.ISDisplayContractor">
+                                                <label class="control-label col-sm-4">Contractor</label>
+                                                <div class="col-sm-6">
+                                                  
+                                                    <select class="form-control" data-ng-options="item.IDContractor as item.Name for item in Contractors" ng-change="getUsersGroupData(IDContractor)"   name="IDContractor"   validator="_required"   ng-model="IDContractor">
+
+                                                        <option value="">Select Contractor</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Send To</label>
+                                                <div class="col-sm-6">
+                                                  
+                                                    <select class="form-control" data-ng-options="item.IDUser as item.UserName for item in WorkFlowUserGroupVM" name="WorkFlowUserGroupVM" required-error-message=" Send To is required." validator="required" ng-model="IDUser">
+
+                                                        <option value="">Users  in Group</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                        <div class="form-group" ng-show="LevelVM.ISDisplayContractorGIGNumber">
+                                            <label class="control-label col-sm-4">Contractor @Model.WorkflowDisplayName Number</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" type="text" maxlength="100"    ng-model="DataObj.Val1" />
+
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="form-group" ng-repeat="DataObj in GIGCreateData">
+
+                                            <div ng-include="templateUrl(DataObj)"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4">Add Documents</label>
+                                            <div class="col-sm-6 fileuploader">
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+
+                                                    <span class="add-edit-client">
+                                                        <a id="uploadResume" class="form-actions" href="#">
+                                                            <button type="button" class="btn btn-theme btn-sm">Select File</button></a>
+
+                                                    </span>
+
+                                                    <div>
+                                                        <div class="table-overflow spacer-top-20 spacer-bottom-20" ng-show='SelectedExternalFiles.length > 0'>
+                                                            <table class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Documents</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="File in SelectedExternalFiles">
+                                                                        <td class="upload-file-text">{{File.Name}}
+                                                                            <a href="#" class="fa fa-remove" data-dismiss="fileupload" ng-click="cancelFile(File,$index)"></a>
+
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End -->
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Date</label>
+
+                                                <div class="col-sm-6">
+                                                    <div class="calendar-icon">
+                                                    
+                                                        <input class="form-control datepicker" type="text" id="datepicker_Date"    name="Created_Date"  readonly required-error-message="Date is required." validator="required" ng-model="DateCreated" data-date-format="yyyy-mm-dd"  ng-click="BindCalenderData(this)" />
+                                                    </div>
+                                                     
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Required By</label>
+
+
+                                                <div class="col-sm-6">
+
+                                                    <div class="calendar-icon">
+                                                        <input class="form-control datepicker" type="text" id="datepicker_Required"   name="datepicker_Required"  readonly required-error-message=" Required Date is required." validator="required,CheckDate" ng-model="DateRequired" data-date-format="yyyy-mm-dd"  ng-click="BindCalenderData(this)" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-2"></div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                        <div class="footer-buttons">
+                                            <div class="pull-left">
+                                                @*<input class="btn btn-theme btn-md"  type="button" value="Save" validation-submit="myForm"   ng-click="SaveGIGData()" ng-disabled="!SubmitDisable" ></input>*@
+
+                                                <input ng-click="SubmitGIGData()"   type="button"  validation-submit="myForm" value="Submit" class="btn btn-theme btn-md" ng-disabled="!SubmitDisable"  ></input>
+
+                                                
+                                            </div>
+                                            <a href="/GIGCommunicationLog/@ViewBag.IDUPW/@ViewBag.IDProject" class="btn btn-gray btn-md pull-right"  >Close</a>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                  
+                                </div>
+
+                                <!-- File Upload Test -->
+
+
+
+                            </div>
+                        </div>
+                    </div>
+        </form>
+    </div>
+  
+ 
+
+
+</div>
+<div class="clearfix"></div>
+
+

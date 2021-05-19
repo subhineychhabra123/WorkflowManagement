@@ -1,0 +1,40 @@
+﻿/*.tooltip {
+width:100%;
+}*/
+.tooltip.error .tooltip-inner {
+    background: #f3797f;
+}
+
+.tooltip.error.top .tooltip-arrow {
+  border-top-color: #f3797f;
+}
+
+.tooltip.error.top-left .tooltip-arrow {
+  border-top-color: #f3797f;
+}
+
+.tooltip.error.top-right .tooltip-arrow {
+  border-top-color: #f3797f;
+}
+
+.tooltip.error.right .tooltip-arrow {
+  border-right-color: #f3797f;
+}
+
+.tooltip.error.left .tooltip-arrow {
+  border-left-color: #f3797f;
+}
+
+.tooltip.error.bottom .tooltip-arrow {
+  border-bottom-color: #f3797f;
+}
+
+.tooltip.error.bottom-left .tooltip-arrow {
+  border-bottom-color: #f3797f;
+}
+
+.tooltip.error.bottom-right .tooltip-arrow {
+  border-bottom-color: #f3797f;
+
+  
+}

@@ -1,0 +1,226 @@
+html, body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #EAEFF2;
+    height: 100%;
+}
+::selection {color:#434345;background:#EAEFF2;}
+::-moz-selection {color:#434345;background:#EAEFF2;}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -2.8em;
+}
+a{
+    text-decoration: none;
+}
+h1{
+    font-family: BrandonGrotesque-MediumItalic;
+	font-weight: normal;
+	font-style: normal;
+}
+h1 span{
+    font-family: BrandonGrotesque-MediumItalic;
+	font-weight: normal;
+	font-style: normal;
+}
+h2{
+    font-family: BrandonGrotesque-LightItalic;
+	font-weight: normal;
+	font-style: normal;
+}
+#indexLogo{
+    height: 40%;
+    background-color: white;
+    padding-bottom: 10px;
+}
+#indexLogo img{
+    margin-left: 17.5%;
+    margin-top: 160px;
+    height: 22px;
+}
+#mobileIndexLogo{
+    width: 70%;
+    padding-left: 6%;
+    padding-top: 120px;
+    padding-bottom: 20px;
+}
+#mobileIndexLogo img{
+    width: 100%;
+}
+#mainContent{
+    height:400px;
+}
+#login{
+    font-size: 36px;
+    line-height: 74px;
+    margin-top: -24px;
+    display: inline-block;
+    float:left;
+    margin-left: 17.5%;
+    width:260px;
+}
+#login a{
+    color: #F3797F;
+    -o-transition:.1s;
+    -ms-transition:.1s;
+    -moz-transition:.1s;
+    -webkit-transition:.1s;
+    transition:.1s;
+}
+#login a:hover{
+    opacity: .6;
+}
+#login span{
+    color: #434345;
+}
+#mobileLogin{
+    margin-top: 2em;
+}
+button{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0px;
+    color: #EAEFF2;
+    background-color: #434345;
+    font-family: BrandonGrotesque-MediumItalic;
+	font-weight: normal;
+	font-style: normal;
+    font-size: 8em;
+    margin-left: 6%;
+    padding-left: .6em;
+    text-align: left;
+    width: 88%;
+    height: 2em;
+    margin-top: 10px;
+}
+#slogan{
+    font-size: 46px;
+    line-height: 74px;
+    margin-top: -32px;
+    display: inline-block;
+    float: left;
+    color: #434345;
+    padding-left: 10px;
+}
+#loginForm{
+    margin-top: 8px;
+    margin-bottom: 183px;
+    display: inline;
+    float:left;
+    margin-left: 17.5%;
+    width: 82.5%;
+    min-width: 240px;
+}
+form input,select {
+    border: 0px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 80px;
+    width: 400px;
+    margin-top: 12px;
+    font-size: 60px;
+    font-family: BrandonGrotesque-LightItalic;
+	font-weight: normal;
+	font-style: normal;
+    padding-left: 12px;
+    color: #434345;
+    outline: none;
+}
+#footer{
+    padding-left: 17.5%;
+    font-family: Uomo;
+	font-weight: normal;
+	font-style: normal;
+    letter-spacing: 1px;
+    color: #434345;
+    opacity: .4;
+    height: 2.8em;
+}
+#mobileFooter{
+    font-family: BrandonGrotesque-LightItalic;
+	font-weight: normal;
+	font-style: normal;
+    font-size: 50px;
+    margin-left: 6%;
+    margin-top: 40px;
+    bottom: 0;
+    width: 94%;
+    display: inline-block;
+    color: #434345;
+}
+.push {
+    height: 2.8em;
+}
+@media only screen and (min-device-width: 667px) {
+    html, body{
+        min-width: 800px;   
+    }
+    #mobileLogin{
+        display: none;
+    }
+    #mobileIndexLogo{
+        display: none;
+    }
+    #mobileFooter{
+        display: none;
+    }
+}
+@media only screen and (max-device-width: 667px) {
+    html, body{
+        min-width: none;
+        padding: 0;
+        height: 94%;
+    }
+    #login{
+        display: none;
+    }
+    #slogan{
+        display: none;
+    }
+    #footer{
+        display: none;
+    }
+    #push{
+        display: none;
+    }
+    #mainContent{
+        height:inherit;
+    }
+    #indexLogo{
+        display: none;
+    }
+    .wrapper {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        margin: 0 auto -2.8em;
+    }
+    #loginForm{
+        margin-bottom: 0;
+        display: inline-block;
+        float:none;
+        margin-left: 0;
+        width: 100%;
+        min-width: none;
+        margin-top: 32px;
+    }
+    form input,select {
+        font-family: BrandonGrotesque-LightItalic;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 6em;
+        margin-left: 6%;
+        margin-right: 6%;
+        padding-left: .6em;
+        padding-right: 0;
+        padding-bottom: 0;
+        text-align: left;
+        width: 82%;
+        height: 1.6em;
+        margin-top: 10px;
+    }
+}

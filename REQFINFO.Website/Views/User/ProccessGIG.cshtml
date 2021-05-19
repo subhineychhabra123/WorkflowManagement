@@ -1,0 +1,414 @@
+﻿@model   REQFINFO.Website.Models.UserXProjectXWorkFlowUserGroupVM
+@{
+    ViewBag.Title = "ProccessGIG";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+<script src="~/Scripts/jquery-ui.js"></script>
+<script src="~/Content/js/jquery.uploadfile.js"></script>
+<script src="~/Content/js/jquery.fileupload.js"></script>
+<link href="~/Content/css/fileupload.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script src="~/Scripts/angular-validation.js"></script>
+<script src="~/Scripts/angular-validation-rule.js"></script>
+
+<script src="~/Scripts/Controllers/ProccessGIG.js"></script>
+<div class="main-content" ng-app="GIGProcessApp">
+    <div class="container"  ng-controller="GIGProcessCtlr" ng-init="GIGInitializer('@ViewBag.IDUPW','@ViewBag.IDWorkFlowUserGroup','@ViewBag.IDProject','@ViewBag.GIG','@ViewBag.IDLevelXFunction','@ViewBag.Leveldata','@ViewBag.ShowActionandreceiver','@ViewBag.Direction','@ViewBag.IDFunctionTrigger')">
+
+        <div class="row">
+
+
+
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-content">
+                    <div class="theme-title">
+                        <div class="theme-title-border">
+                            <i class="fa fa-file-text-o"></i><span>Proccess @Model.WorkflowDisplayName</span>
+                        </div>
+                    </div>
+
+                    <div class="white-area">
+                        <div class="row">
+                            <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Project Name</label>
+                                    <div class="col-sm-6">
+                                        <div class="label-content">
+                                            {{GIGVM.ProjectName}}
+                                           
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+
+
+
+
+
+
+                                <div class="form-group"  ng-show="{{@ViewBag.ISDisplayContractor}}">
+                                    <label class="control-label col-sm-4">Contractor</label>
+                                    <div class="col-sm-6">
+                                        <div class="label-content">
+                                            {{GIGData.ContractorName}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">@Model.WorkflowDisplayName Number</label>
+                                    <div class="col-sm-6">
+                                        <div class="label-content">
+                                            {{GIGData.Number}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+
+                                <div class="form-group"  ng-show="{{@ViewBag.ISDisplayContractorGIGNumber}}">
+                                    <label class="control-label col-sm-4">Contractor @Model.WorkflowDisplayName Number</label>
+                                    <div class="col-sm-6">
+                                        <div class="label-content">
+                                            {{GIGData.ContractorGIGNumber}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+
+                                <div class="form-group" ng-repeat="DataObj in GIGView">
+
+
+
+                                    <label class="control-label col-sm-4">{{DataObj.Label}}</label>
+                                    <div class="col-sm-6">
+                                        <div class="label-content">
+                                            {{DataObj.IDLookupType !=''  ? DataObj.CustomLookupName : DataObj.Val1}}
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+@*                        <div class="table-overflow spacer-top-20 spacer-bottom-20" ng-show='Attachments.length > 0'>*@
+                           <div class="table-overflow spacer-top-20 spacer-bottom-20" >
+
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Documents</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="File in Attachments">
+                                        <td><a href="@System.Web.Configuration.WebConfigurationManager.AppSettings["FileDownloadpath"]{{File.Location}}" target="_self" download="{{File.Name}}"  >{{File.Name}}</a></td>
+                                    </tr>
+                                    <tr ng-show="Attachments.length === 0">
+
+
+                                         <td><span class="Emptymsg">No documents attached </span></td>
+
+                                    </tr>
+
+
+                        </div>
+                        </tbody>
+                            </table>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Orgainator</label>
+                                <div class="col-sm-6">
+                                    <div class="label-content">
+                                        {{GIGData.GIGOriginatorName}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Date</label>
+                                <div class="col-sm-6">
+                                    <div class="label-content">
+                                        {{GIGData.DateCreated.slice(6, -2) | date: 'MM-dd-yyyy' }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Prepared By</label>
+                                <div class="col-sm-6">
+                                    <div class="label-content">
+                                        {{GIGData.PreparedByName}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Required By</label>
+                                <div class="col-sm-6">
+                                    <div class="label-content">
+                                        {{GIGData.DateRequired.slice(6, -2) | date: 'MM-dd-yyyy' }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+
+                            <form name="signInForm">
+
+                                <div ng-show='ShowActionandreceiver'>
+                                    <div class="form-group" ng-show="@ViewBag.AnswerDiv">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4">Direction</label>
+                                            <div class="col-sm-6">
+                                                <div class="label-content" ng-if="Direction ==1">Forward </div>
+                                                <div class="label-content" ng-if="Direction ==2">Backword </div>
+                                                <div class="label-content" ng-if="Direction ==0">Close</div>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-show='{{ShowActionandreceiver}}'>
+                                    <div class="form-group" ng-show="@ViewBag.AnswerDiv">
+                                        <label class="control-label col-sm-4">Select Receiver</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" data-ng-options="item.IDUser as item.UserName for item in WorkFlowUserGroupVM" required ng-model="IDUser" ng-disabled="DDdisable">
+
+                                                <option value="">Users in Group</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="container">
+
+                        <!-- Trigger the modal with a button -->
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Attached Documents</h4>
+                                    </div>
+                                    <div class="table-overflow spacer-top-20 spacer-bottom-20">
+
+
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Documents</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="File in AttachmentsForLC">
+                                                    <td><a href="@System.Web.Configuration.WebConfigurationManager.AppSettings["FileDownloadpath"]{{File.Location}}" target="_self" download="{{File.Name}}"  >{{File.Name}}</a></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+
+
+                                             
+
+
+
+
+
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+@*                    <div class="footer-buttons spacer-bottom-30" ng-show="@ViewBag.AnswerDiv" ng-hide="true">
+
+                        <div class="pull-left" ng-repeat="Actions in functionVM">
+
+                            <a href="javscript:void(0)" ng-click="ShowDiv(Actions.Name)" class="btn btn-theme btn-md marginRt5" ng-show="Actions.IDLevelXFunction == IDLevelXFunction" >{{Actions.Name}}</a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>*@
+                    <div id="ActionsFields" ng-show="@ViewBag.AnswerDiv">
+                        <div class="row">
+                            <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"></label>
+                                    <div class="col-sm-6">
+                                        <div class="label-content">
+                                            {{ActionName}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Response</label>
+
+
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" name="Detail" ng-model="LiFeCycle.Detail"></textarea>
+                                    </div>
+
+
+                                    <div class="col-sm-2"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Add Documents</label>
+                                    <div class="col-sm-6">
+                                        <div class="pull-left">
+                                            <span class="add-edit-client" data-provides="fileupload">
+                                                <a id="uploadResume" class="form-actions" href="#">
+                                                    <button type="button" class="btn btn-theme btn-sm">Select File</button></a>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">&nbsp;</label>
+                                    <div class="col-sm-6">
+                                        <div class="table-overflow" ng-show='SelectedExternalFiles.length > 0'>
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Documents</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="File in SelectedExternalFiles">
+                                                        <td>{{File.Name}}
+
+                                              <a href="javascript:void(0)" class="fa fa-remove pull-right" data-dismiss="fileupload" ng-click="cancelFile(File,$index)"></a>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <!-- End -->
+
+                        <!-- extera div -->
+
+
+
+
+
+
+
+                        <div class="footer-buttons spacer-bottom-30">
+                            <div class="pull-left">
+                             @*<a href="" ng-click="SaveGIGData(false)" ng-disabled="signInForm.$invalid && ShowActionandreceiver" class="btn btn-theme btn-md" />Save</a>*@
+                                    <a href="" ng-click="SaveGIGData(true)" ng-disabled="signInForm.$invalid && ShowActionandreceiver" class="btn btn-theme btn-md" />Submit</a>
+
+                            </div>
+                            <a href="/GIGCommunicationLog/@ViewBag.IDUPW/@ViewBag.IDProject" class="btn btn-gray btn-md pull-right"  >Close</a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div class="white-area">
+
+                        <div class="communication-box" ng-repeat="DataObj in Logs">
+                            <div class="communication-user">
+                                <div class="user-box">
+                                    <div class="user-photo">
+                                        {{DataObj.ImageName}}    
+                                    </div>
+
+                                    <div class="user-name-detail">
+                                        <div class="user-name">
+                                            {{DataObj.loggedbyFirstName}}  {{DataObj.loggedbyLastName}}
+                                        </div>
+                                        <div class="user-date">
+                                            {{DataObj.LoggedOn.slice(6, -2) | date: 'MMM -dd-yyyy'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="communication-message">
+                                <div class="message-box">
+                                    <div class="message-reciver">
+                                        <div class="messager-name">
+                                            To   {{DataObj.SendtoFirstName}}   {{DataObj.SendtoLastName}} 
+                                        </div>
+                                    </div>
+                                    <div class="message-content">
+                                        {{DataObj.Detail}}										
+                                    </div>
+                                    <div class="message-actions">
+                                        <ul>
+
+                                            <li ng-if="DataObj.Attachment_Count !=0"><a href="#" ng-click="GetAttcachments(DataObj.IDLifeCycle)" data-toggle="modal" data-target="#myModal">Attachments</a></li>
+                                            <li>{{DataObj.PastTenseFunction}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+

@@ -1,0 +1,2448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GIGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="IDAttachment" />
+          </Key>
+          <Property Name="IDAttachment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDLifeCycle" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="IDCompany" />
+          </Key>
+          <Property Name="IDCompany" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Contractor">
+          <Key>
+            <PropertyRef Name="IDContractor" />
+          </Key>
+          <Property Name="IDContractor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CustomLookup">
+          <Key>
+            <PropertyRef Name="IDCustomLookup" />
+          </Key>
+          <Property Name="IDCustomLookup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDLookupType" Type="int" Nullable="false" />
+          <Property Name="Val1" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Val2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="IDFunction" />
+          </Key>
+          <Property Name="IDFunction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Direction" Type="int" />
+          <Property Name="PastTenseFunction" Type="nchar" MaxLength="50" />
+          <Property Name="IDTab" Type="int" />
+          <Property Name="IsAlignedLeft" Type="bit" Nullable="false" />
+          <Property Name="FunctionOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'GIG_Latest.dbo.FunctionTrigger' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="FunctionTrigger">
+          <Property Name="IDFunctionTrigger" Type="int" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+        <EntityType Name="FunctionXTab">
+          <Key>
+            <PropertyRef Name="IDFunctionXTab" />
+          </Key>
+          <Property Name="IDFunctionXTab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDFunction" Type="int" Nullable="false" />
+          <Property Name="IDTab" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GIG">
+          <Key>
+            <PropertyRef Name="IDGig" />
+          </Key>
+          <Property Name="IDGig" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDUPW" Type="int" Nullable="false" />
+          <Property Name="IDContractor" Type="int" />
+          <Property Name="Number" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="DateRequired" Type="datetime" />
+          <Property Name="ContractorGIGNumber" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="IDLevel" />
+          </Key>
+          <Property Name="IDLevel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDWorkFlowUserGroup" Type="int" Nullable="false" />
+          <Property Name="Sequence" Type="int" />
+          <Property Name="ISDisplayContractorGIGNumber" Type="bit" Nullable="false" />
+          <Property Name="ISDisplayContractor" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LevelXFunction">
+          <Key>
+            <PropertyRef Name="IDLevelXFunction" />
+          </Key>
+          <Property Name="IDLevelXFunction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDLevel" Type="int" Nullable="false" />
+          <Property Name="IDFunction" Type="int" Nullable="false" />
+          <Property Name="IsCreatedNotClosed" Type="bit" />
+          <Property Name="IDFunctionTrigger" Type="int" />
+        </EntityType>
+        <EntityType Name="LifeCycle">
+          <Key>
+            <PropertyRef Name="IDLifeCycle" />
+          </Key>
+          <Property Name="IDLifeCycle" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDGig" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDLevelXFunction" Type="int" />
+          <Property Name="LoggedByID" Type="int" Nullable="false" />
+          <Property Name="OwnedByID" Type="int" />
+          <Property Name="AssignedToID" Type="int" />
+          <Property Name="LoggedOn" Type="datetime" Nullable="false" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+          <Property Name="ISSubmitted" Type="bit" Nullable="false" />
+          <Property Name="IDLevel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LookupType">
+          <Key>
+            <PropertyRef Name="IDLookupType" />
+          </Key>
+          <Property Name="IDLookupType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="IDProject" />
+          </Key>
+          <Property Name="IDProject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCompany" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Tab">
+          <Key>
+            <PropertyRef Name="IDTab" />
+          </Key>
+          <Property Name="IDTab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tab" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UDFDefinition">
+          <Key>
+            <PropertyRef Name="IDUDFDefinition" />
+          </Key>
+          <Property Name="IDUDFDefinition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDWorkflow" Type="int" Nullable="false" />
+          <Property Name="IDProject" Type="int" />
+          <Property Name="IDUDFType" Type="int" />
+          <Property Name="Label" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+          <Property Name="IsRequired" Type="bit" Nullable="false" />
+          <Property Name="DefaultValue" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDLookupType" Type="int" />
+          <Property Name="CanEdit" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UDFInstance">
+          <Key>
+            <PropertyRef Name="IDUDFInstance" />
+          </Key>
+          <Property Name="IDUDFInstance" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDGig" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IDUDFDefinition" Type="int" Nullable="false" />
+          <Property Name="Val1" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UDFTemplate">
+          <Key>
+            <PropertyRef Name="IDUDFTemplate" />
+          </Key>
+          <Property Name="IDUDFTemplate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDWorkflow" Type="int" Nullable="false" />
+          <Property Name="IDUDFType" Type="int" />
+          <Property Name="Label" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+          <Property Name="IsRequired" Type="bit" Nullable="false" />
+          <Property Name="DefaultValue" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDLookupType" Type="int" />
+          <Property Name="CanEdit" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UDFType">
+          <Key>
+            <PropertyRef Name="IDUDFType" />
+          </Key>
+          <Property Name="IDUDFType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UDFValidation">
+          <Key>
+            <PropertyRef Name="IDUDFValidation" />
+          </Key>
+          <Property Name="IDUDFValidation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUDFDefinition" Type="int" Nullable="false" />
+          <Property Name="IDUDFValidationDefinition" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UDFValidationDefinition">
+          <Key>
+            <PropertyRef Name="IDUDFValidationDefinition" />
+          </Key>
+          <Property Name="IDUDFValidationDefinition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ValidationType" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DefaultValue" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCompany" Type="int" Nullable="false" />
+          <Property Name="IDContractor" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhoneWork" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneCell" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserXProjectXWorkFlowUserGroup">
+          <Key>
+            <PropertyRef Name="IDUPW" />
+          </Key>
+          <Property Name="IDUPW" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="IDProject" Type="int" Nullable="false" />
+          <Property Name="IDWorkFlowUserGroup" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="IDWorkflow" />
+          </Key>
+          <Property Name="IDWorkflow" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IDProjectTemplate" Type="int" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WorkFlowUserGroup">
+          <Key>
+            <PropertyRef Name="IDWorkFlowUserGroup" />
+          </Key>
+          <Property Name="IDWorkFlowUserGroup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDWorkFlow" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Attachment_LifeCycle">
+          <End Role="LifeCycle" Type="Self.LifeCycle" Multiplicity="1" />
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LifeCycle">
+              <PropertyRef Name="IDLifeCycle" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="IDLifeCycle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomLookup_LookupType">
+          <End Role="LookupType" Type="Self.LookupType" Multiplicity="1" />
+          <End Role="CustomLookup" Type="Self.CustomLookup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="IDLookupType" />
+            </Principal>
+            <Dependent Role="CustomLookup">
+              <PropertyRef Name="IDLookupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Function_Tab">
+          <End Role="Tab" Type="Self.Tab" Multiplicity="0..1" />
+          <End Role="Function" Type="Self.Function" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab">
+              <PropertyRef Name="IDTab" />
+            </Principal>
+            <Dependent Role="Function">
+              <PropertyRef Name="IDTab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FunctionXTab_Tab">
+          <End Role="Tab" Type="Self.Tab" Multiplicity="1" />
+          <End Role="FunctionXTab" Type="Self.FunctionXTab" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab">
+              <PropertyRef Name="IDTab" />
+            </Principal>
+            <Dependent Role="FunctionXTab">
+              <PropertyRef Name="IDTab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIG_Contractor">
+          <End Role="Contractor" Type="Self.Contractor" Multiplicity="0..1" />
+          <End Role="GIG" Type="Self.GIG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractor">
+              <PropertyRef Name="IDContractor" />
+            </Principal>
+            <Dependent Role="GIG">
+              <PropertyRef Name="IDContractor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIG_UserXProjectXWorkFlowUserGroup">
+          <End Role="UserXProjectXWorkFlowUserGroup" Type="Self.UserXProjectXWorkFlowUserGroup" Multiplicity="1" />
+          <End Role="GIG" Type="Self.GIG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserXProjectXWorkFlowUserGroup">
+              <PropertyRef Name="IDUPW" />
+            </Principal>
+            <Dependent Role="GIG">
+              <PropertyRef Name="IDUPW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Level_WorkFlowUserGroup">
+          <End Role="WorkFlowUserGroup" Type="Self.WorkFlowUserGroup" Multiplicity="1" />
+          <End Role="Level" Type="Self.Level" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkFlowUserGroup">
+              <PropertyRef Name="IDWorkFlowUserGroup" />
+            </Principal>
+            <Dependent Role="Level">
+              <PropertyRef Name="IDWorkFlowUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelXFunction_Function">
+          <End Role="Function" Type="Self.Function" Multiplicity="1" />
+          <End Role="LevelXFunction" Type="Self.LevelXFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Function">
+              <PropertyRef Name="IDFunction" />
+            </Principal>
+            <Dependent Role="LevelXFunction">
+              <PropertyRef Name="IDFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelXFunction_Level">
+          <End Role="Level" Type="Self.Level" Multiplicity="1" />
+          <End Role="LevelXFunction" Type="Self.LevelXFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="IDLevel" />
+            </Principal>
+            <Dependent Role="LevelXFunction">
+              <PropertyRef Name="IDLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelXFunction_LevelXFunction">
+          <End Role="LevelXFunction" Type="Self.LevelXFunction" Multiplicity="1" />
+          <End Role="LevelXFunction1" Type="Self.LevelXFunction" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LevelXFunction">
+              <PropertyRef Name="IDLevelXFunction" />
+            </Principal>
+            <Dependent Role="LevelXFunction1">
+              <PropertyRef Name="IDLevelXFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_GIG">
+          <End Role="GIG" Type="Self.GIG" Multiplicity="1" />
+          <End Role="LifeCycle" Type="Self.LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIG">
+              <PropertyRef Name="IDGig" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="IDGig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_Level">
+          <End Role="Level" Type="Self.Level" Multiplicity="1" />
+          <End Role="LifeCycle" Type="Self.LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="IDLevel" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="IDLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_LevelXFunction">
+          <End Role="LevelXFunction" Type="Self.LevelXFunction" Multiplicity="0..1" />
+          <End Role="LifeCycle" Type="Self.LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelXFunction">
+              <PropertyRef Name="IDLevelXFunction" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="IDLevelXFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LifeCycle" Type="Self.LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="LoggedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LifeCycle" Type="Self.LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="OwnedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_User2">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LifeCycle" Type="Self.LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="AssignedToID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="IDCompany" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="IDCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFDefinition_LookupType">
+          <End Role="LookupType" Type="Self.LookupType" Multiplicity="0..1" />
+          <End Role="UDFDefinition" Type="Self.UDFDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="IDLookupType" />
+            </Principal>
+            <Dependent Role="UDFDefinition">
+              <PropertyRef Name="IDLookupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFDefinition_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="UDFDefinition" Type="Self.UDFDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="IDProject" />
+            </Principal>
+            <Dependent Role="UDFDefinition">
+              <PropertyRef Name="IDProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFDefinition_UDFType">
+          <End Role="UDFType" Type="Self.UDFType" Multiplicity="0..1" />
+          <End Role="UDFDefinition" Type="Self.UDFDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFType">
+              <PropertyRef Name="IDUDFType" />
+            </Principal>
+            <Dependent Role="UDFDefinition">
+              <PropertyRef Name="IDUDFType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFDefinition_Workflow">
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="UDFDefinition" Type="Self.UDFDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="IDWorkflow" />
+            </Principal>
+            <Dependent Role="UDFDefinition">
+              <PropertyRef Name="IDWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFInstance_GIG">
+          <End Role="GIG" Type="Self.GIG" Multiplicity="1" />
+          <End Role="UDFInstance" Type="Self.UDFInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIG">
+              <PropertyRef Name="IDGig" />
+            </Principal>
+            <Dependent Role="UDFInstance">
+              <PropertyRef Name="IDGig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFInstance_UDFDefinition">
+          <End Role="UDFDefinition" Type="Self.UDFDefinition" Multiplicity="1" />
+          <End Role="UDFInstance" Type="Self.UDFInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFDefinition">
+              <PropertyRef Name="IDUDFDefinition" />
+            </Principal>
+            <Dependent Role="UDFInstance">
+              <PropertyRef Name="IDUDFDefinition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFTemplate_LookupType">
+          <End Role="LookupType" Type="Self.LookupType" Multiplicity="0..1" />
+          <End Role="UDFTemplate" Type="Self.UDFTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="IDLookupType" />
+            </Principal>
+            <Dependent Role="UDFTemplate">
+              <PropertyRef Name="IDLookupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFTemplate_UDFType1">
+          <End Role="UDFType" Type="Self.UDFType" Multiplicity="0..1" />
+          <End Role="UDFTemplate" Type="Self.UDFTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFType">
+              <PropertyRef Name="IDUDFType" />
+            </Principal>
+            <Dependent Role="UDFTemplate">
+              <PropertyRef Name="IDUDFType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFTemplate_Workflow">
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="UDFTemplate" Type="Self.UDFTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="IDWorkflow" />
+            </Principal>
+            <Dependent Role="UDFTemplate">
+              <PropertyRef Name="IDWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFValidation_UDFDefinition">
+          <End Role="UDFDefinition" Type="Self.UDFDefinition" Multiplicity="1" />
+          <End Role="UDFValidation" Type="Self.UDFValidation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFDefinition">
+              <PropertyRef Name="IDUDFDefinition" />
+            </Principal>
+            <Dependent Role="UDFValidation">
+              <PropertyRef Name="IDUDFDefinition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFValidation_UDFValidationDefinition">
+          <End Role="UDFValidationDefinition" Type="Self.UDFValidationDefinition" Multiplicity="1" />
+          <End Role="UDFValidation" Type="Self.UDFValidation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFValidationDefinition">
+              <PropertyRef Name="IDUDFValidationDefinition" />
+            </Principal>
+            <Dependent Role="UDFValidation">
+              <PropertyRef Name="IDUDFValidationDefinition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="IDCompany" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Contractor">
+          <End Role="Contractor" Type="Self.Contractor" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractor">
+              <PropertyRef Name="IDContractor" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDContractor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserXProjectXWorkFlowUserGroup_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="UserXProjectXWorkFlowUserGroup" Type="Self.UserXProjectXWorkFlowUserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="IDProject" />
+            </Principal>
+            <Dependent Role="UserXProjectXWorkFlowUserGroup">
+              <PropertyRef Name="IDProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserXProjectXWorkFlowUserGroup_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserXProjectXWorkFlowUserGroup" Type="Self.UserXProjectXWorkFlowUserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="UserXProjectXWorkFlowUserGroup">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup">
+          <End Role="WorkFlowUserGroup" Type="Self.WorkFlowUserGroup" Multiplicity="1" />
+          <End Role="UserXProjectXWorkFlowUserGroup" Type="Self.UserXProjectXWorkFlowUserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkFlowUserGroup">
+              <PropertyRef Name="IDWorkFlowUserGroup" />
+            </Principal>
+            <Dependent Role="UserXProjectXWorkFlowUserGroup">
+              <PropertyRef Name="IDWorkFlowUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowUserGroup_Workflow">
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="WorkFlowUserGroup" Type="Self.WorkFlowUserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="IDWorkflow" />
+            </Principal>
+            <Dependent Role="WorkFlowUserGroup">
+              <PropertyRef Name="IDWorkFlow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetLevelDetailNextOrPrevious" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProject" Type="int" Mode="In" />
+          <Parameter Name="CurrentSequence" Type="int" Mode="In" />
+          <Parameter Name="IsNextNotPreviousLevel" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetActionsForLoggedInUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDUser" Type="int" Mode="In" />
+          <Parameter Name="IDProject" Type="int" Mode="In" />
+          <Parameter Name="IDGIG" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IDFunctionTrigger" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetActionsOnFirstLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDUser" Type="int" Mode="In" />
+          <Parameter Name="IDProject" Type="int" Mode="In" />
+          <Parameter Name="IDWorkFlowUserGroup" Type="int" Mode="In" />
+          <Parameter Name="IsCreatedNotClosed" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetCreateOption" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdWorkFlowUSerGroup" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetGIGCommunicationCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProject" Type="int" Mode="In" />
+          <Parameter Name="IDTab" Type="int" Mode="In" />
+          <Parameter Name="TabStatus" Type="int" Mode="In" />
+          <Parameter Name="StatusCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="RFI_GetGIGCommunicationLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDUPW" Type="int" Mode="In" />
+          <Parameter Name="IDStatus" Type="int" Mode="In" />
+          <Parameter Name="Search" Type="varchar" Mode="In" />
+          <Parameter Name="SearchBy" Type="varchar" Mode="In" />
+          <Parameter Name="SearchOrder" Type="bit" Mode="In" />
+          <Parameter Name="SearchbyField" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetGIGLogData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDGIG" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetLevelXFunctionData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDWorkFlowUserGroup" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetProjectsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="WorkFlowId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetSendto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sequence" Type="int" Mode="In" />
+          <Parameter Name="IDProject" Type="int" Mode="In" />
+          <Parameter Name="IDContractor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetUDFFieldsData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDUPW" Type="int" Mode="In" />
+          <Parameter Name="IDProject" Type="int" Mode="In" />
+          <Parameter Name="IDGig" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetUDFFieldsValidations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDUDFDefinition" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RFI_GetUSercurrentLevelsCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProject" Type="int" Mode="In" />
+          <Parameter Name="IDUser" Type="int" Mode="In" />
+          <Parameter Name="CurrentSequence" Type="int" Mode="In" />
+          <Parameter Name="totalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="RFI_GetUserWorkflow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="GIGModelStoreContainer">
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contractor" EntityType="Self.Contractor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomLookup" EntityType="Self.CustomLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Function" EntityType="Self.Function" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FunctionXTab" EntityType="Self.FunctionXTab" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GIG" EntityType="Self.GIG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LevelXFunction" EntityType="Self.LevelXFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LifeCycle" EntityType="Self.LifeCycle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupType" EntityType="Self.LookupType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab" EntityType="Self.Tab" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDFDefinition" EntityType="Self.UDFDefinition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDFInstance" EntityType="Self.UDFInstance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDFTemplate" EntityType="Self.UDFTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDFType" EntityType="Self.UDFType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDFValidation" EntityType="Self.UDFValidation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDFValidationDefinition" EntityType="Self.UDFValidationDefinition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserXProjectXWorkFlowUserGroup" EntityType="Self.UserXProjectXWorkFlowUserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workflow" EntityType="Self.Workflow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkFlowUserGroup" EntityType="Self.WorkFlowUserGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Attachment_LifeCycle" Association="Self.FK_Attachment_LifeCycle">
+            <End Role="LifeCycle" EntitySet="LifeCycle" />
+            <End Role="Attachment" EntitySet="Attachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomLookup_LookupType" Association="Self.FK_CustomLookup_LookupType">
+            <End Role="LookupType" EntitySet="LookupType" />
+            <End Role="CustomLookup" EntitySet="CustomLookup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Function_Tab" Association="Self.FK_Function_Tab">
+            <End Role="Tab" EntitySet="Tab" />
+            <End Role="Function" EntitySet="Function" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FunctionXTab_Tab" Association="Self.FK_FunctionXTab_Tab">
+            <End Role="Tab" EntitySet="Tab" />
+            <End Role="FunctionXTab" EntitySet="FunctionXTab" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIG_Contractor" Association="Self.FK_GIG_Contractor">
+            <End Role="Contractor" EntitySet="Contractor" />
+            <End Role="GIG" EntitySet="GIG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIG_UserXProjectXWorkFlowUserGroup" Association="Self.FK_GIG_UserXProjectXWorkFlowUserGroup">
+            <End Role="UserXProjectXWorkFlowUserGroup" EntitySet="UserXProjectXWorkFlowUserGroup" />
+            <End Role="GIG" EntitySet="GIG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Level_WorkFlowUserGroup" Association="Self.FK_Level_WorkFlowUserGroup">
+            <End Role="WorkFlowUserGroup" EntitySet="WorkFlowUserGroup" />
+            <End Role="Level" EntitySet="Level" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelXFunction_Function" Association="Self.FK_LevelXFunction_Function">
+            <End Role="Function" EntitySet="Function" />
+            <End Role="LevelXFunction" EntitySet="LevelXFunction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelXFunction_Level" Association="Self.FK_LevelXFunction_Level">
+            <End Role="Level" EntitySet="Level" />
+            <End Role="LevelXFunction" EntitySet="LevelXFunction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelXFunction_LevelXFunction" Association="Self.FK_LevelXFunction_LevelXFunction">
+            <End Role="LevelXFunction" EntitySet="LevelXFunction" />
+            <End Role="LevelXFunction1" EntitySet="LevelXFunction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_GIG" Association="Self.FK_LifeCycle_GIG">
+            <End Role="GIG" EntitySet="GIG" />
+            <End Role="LifeCycle" EntitySet="LifeCycle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_Level" Association="Self.FK_LifeCycle_Level">
+            <End Role="Level" EntitySet="Level" />
+            <End Role="LifeCycle" EntitySet="LifeCycle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_LevelXFunction" Association="Self.FK_LifeCycle_LevelXFunction">
+            <End Role="LevelXFunction" EntitySet="LevelXFunction" />
+            <End Role="LifeCycle" EntitySet="LifeCycle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_User" Association="Self.FK_LifeCycle_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LifeCycle" EntitySet="LifeCycle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_User1" Association="Self.FK_LifeCycle_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="LifeCycle" EntitySet="LifeCycle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_User2" Association="Self.FK_LifeCycle_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="LifeCycle" EntitySet="LifeCycle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Company" Association="Self.FK_Project_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFDefinition_LookupType" Association="Self.FK_UDFDefinition_LookupType">
+            <End Role="LookupType" EntitySet="LookupType" />
+            <End Role="UDFDefinition" EntitySet="UDFDefinition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFDefinition_Project" Association="Self.FK_UDFDefinition_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="UDFDefinition" EntitySet="UDFDefinition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFDefinition_UDFType" Association="Self.FK_UDFDefinition_UDFType">
+            <End Role="UDFType" EntitySet="UDFType" />
+            <End Role="UDFDefinition" EntitySet="UDFDefinition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFDefinition_Workflow" Association="Self.FK_UDFDefinition_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="UDFDefinition" EntitySet="UDFDefinition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFInstance_GIG" Association="Self.FK_UDFInstance_GIG">
+            <End Role="GIG" EntitySet="GIG" />
+            <End Role="UDFInstance" EntitySet="UDFInstance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFInstance_UDFDefinition" Association="Self.FK_UDFInstance_UDFDefinition">
+            <End Role="UDFDefinition" EntitySet="UDFDefinition" />
+            <End Role="UDFInstance" EntitySet="UDFInstance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFTemplate_LookupType" Association="Self.FK_UDFTemplate_LookupType">
+            <End Role="LookupType" EntitySet="LookupType" />
+            <End Role="UDFTemplate" EntitySet="UDFTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFTemplate_UDFType1" Association="Self.FK_UDFTemplate_UDFType1">
+            <End Role="UDFType" EntitySet="UDFType" />
+            <End Role="UDFTemplate" EntitySet="UDFTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFTemplate_Workflow" Association="Self.FK_UDFTemplate_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="UDFTemplate" EntitySet="UDFTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFValidation_UDFDefinition" Association="Self.FK_UDFValidation_UDFDefinition">
+            <End Role="UDFDefinition" EntitySet="UDFDefinition" />
+            <End Role="UDFValidation" EntitySet="UDFValidation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFValidation_UDFValidationDefinition" Association="Self.FK_UDFValidation_UDFValidationDefinition">
+            <End Role="UDFValidationDefinition" EntitySet="UDFValidationDefinition" />
+            <End Role="UDFValidation" EntitySet="UDFValidation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Contractor" Association="Self.FK_User_Contractor">
+            <End Role="Contractor" EntitySet="Contractor" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserXProjectXWorkFlowUserGroup_Project" Association="Self.FK_UserXProjectXWorkFlowUserGroup_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="UserXProjectXWorkFlowUserGroup" EntitySet="UserXProjectXWorkFlowUserGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserXProjectXWorkFlowUserGroup_User" Association="Self.FK_UserXProjectXWorkFlowUserGroup_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserXProjectXWorkFlowUserGroup" EntitySet="UserXProjectXWorkFlowUserGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup" Association="Self.FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup">
+            <End Role="WorkFlowUserGroup" EntitySet="WorkFlowUserGroup" />
+            <End Role="UserXProjectXWorkFlowUserGroup" EntitySet="UserXProjectXWorkFlowUserGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowUserGroup_Workflow" Association="Self.FK_WorkFlowUserGroup_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="WorkFlowUserGroup" EntitySet="WorkFlowUserGroup" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GIGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GIGEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(GIGModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(GIGModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="RFI_GetActionsForLoggedInUser" ReturnType="Collection(GIGModel.RFI_GetActionsForLoggedInUser_Result)">
+            <Parameter Name="IDUser" Mode="In" Type="Int32" />
+            <Parameter Name="IDProject" Mode="In" Type="Int32" />
+            <Parameter Name="IDGIG" Mode="In" Type="Guid" />
+            <Parameter Name="IDFunctionTrigger" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetGIGCommunicationCounts">
+            <Parameter Name="IDProject" Mode="In" Type="Int32" />
+            <Parameter Name="IDTab" Mode="In" Type="Int32" />
+            <Parameter Name="TabStatus" Mode="In" Type="Int32" />
+            <Parameter Name="StatusCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetGIGCommunicationLog" ReturnType="Collection(GIGModel.RFI_GetGIGCommunicationLog_Result)">
+            <Parameter Name="IDUPW" Mode="In" Type="Int32" />
+            <Parameter Name="IDStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Search" Mode="In" Type="String" />
+            <Parameter Name="SearchBy" Mode="In" Type="String" />
+            <Parameter Name="SearchOrder" Mode="In" Type="Boolean" />
+            <Parameter Name="SearchbyField" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetProjectsList" ReturnType="Collection(GIGModel.RFI_GetProjectsList_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="WorkFlowId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetUDFFieldsData" ReturnType="Collection(GIGModel.RFI_GetUDFFieldsData_Result)">
+            <Parameter Name="IDUPW" Mode="In" Type="Int32" />
+            <Parameter Name="IDProject" Mode="In" Type="Int32" />
+            <Parameter Name="IDGig" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetUDFFieldsValidations" ReturnType="Collection(GIGModel.RFI_GetUDFFieldsValidations_Result)">
+          <Parameter Name="IDUDFDefinition" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetUserWorkflow" ReturnType="Collection(GIGModel.RFI_GetUserWorkflow_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetLevelXFunctionData" ReturnType="Collection(GIGModel.RFI_GetLevelXFunctionData_Result)">
+          <Parameter Name="IDWorkFlowUserGroup" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetActionsOnFirstLevel" ReturnType="Collection(GIGModel.RFI_GetActionsOnFirstLevel_Result)">
+            <Parameter Name="IDUser" Mode="In" Type="Int32" />
+            <Parameter Name="IDProject" Mode="In" Type="Int32" />
+            <Parameter Name="IDWorkFlowUserGroup" Mode="In" Type="Int32" />
+            <Parameter Name="IsCreatedNotClosed" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetGIGLogData" ReturnType="Collection(GIGModel.RFI_GetGIGLogData_Result)">
+          <Parameter Name="IDGIG" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetCreateOption" ReturnType="Collection(GIGModel.RFI_GetCreateOption_Result)">
+          <Parameter Name="IdWorkFlowUSerGroup" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLevelDetailNextOrPrevious" ReturnType="Collection(GIGModel.GetLevelDetailNextOrPrevious_Result)">
+            <Parameter Name="IDProject" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentSequence" Mode="In" Type="Int32" />
+            <Parameter Name="IsNextNotPreviousLevel" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetSendto" ReturnType="Collection(GIGModel.RFI_GetSendto_Result)">
+            <Parameter Name="sequence" Mode="In" Type="Int32" />
+            <Parameter Name="IDProject" Mode="In" Type="Int32" />
+            <Parameter Name="IDContractor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RFI_GetUSercurrentLevelsCount">
+            <Parameter Name="IDProject" Mode="In" Type="Int32" />
+            <Parameter Name="IDUser" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentSequence" Mode="In" Type="Int32" />
+            <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Attachments" EntityType="GIGModel.Attachment" />
+          <EntitySet Name="Companies" EntityType="GIGModel.Company" />
+          <EntitySet Name="Contractors" EntityType="GIGModel.Contractor" />
+          <EntitySet Name="CustomLookups" EntityType="GIGModel.CustomLookup" />
+          <EntitySet Name="Functions" EntityType="GIGModel.Function" />
+          <EntitySet Name="FunctionXTabs" EntityType="GIGModel.FunctionXTab" />
+          <EntitySet Name="GIGs" EntityType="GIGModel.GIG" />
+          <EntitySet Name="Levels" EntityType="GIGModel.Level" />
+          <EntitySet Name="LevelXFunctions" EntityType="GIGModel.LevelXFunction" />
+          <EntitySet Name="LifeCycles" EntityType="GIGModel.LifeCycle" />
+          <EntitySet Name="LookupTypes" EntityType="GIGModel.LookupType" />
+          <EntitySet Name="Projects" EntityType="GIGModel.Project" />
+          <EntitySet Name="Tabs" EntityType="GIGModel.Tab" />
+          <EntitySet Name="UDFDefinitions" EntityType="GIGModel.UDFDefinition" />
+          <EntitySet Name="UDFInstances" EntityType="GIGModel.UDFInstance" />
+          <EntitySet Name="UDFTemplates" EntityType="GIGModel.UDFTemplate" />
+          <EntitySet Name="UDFTypes" EntityType="GIGModel.UDFType" />
+          <EntitySet Name="UDFValidations" EntityType="GIGModel.UDFValidation" />
+          <EntitySet Name="UDFValidationDefinitions" EntityType="GIGModel.UDFValidationDefinition" />
+          <EntitySet Name="Users" EntityType="GIGModel.User" />
+          <EntitySet Name="UserXProjectXWorkFlowUserGroups" EntityType="GIGModel.UserXProjectXWorkFlowUserGroup" />
+          <EntitySet Name="Workflows" EntityType="GIGModel.Workflow" />
+          <EntitySet Name="WorkFlowUserGroups" EntityType="GIGModel.WorkFlowUserGroup" />
+          <AssociationSet Name="FK_Attachment_LifeCycle" Association="GIGModel.FK_Attachment_LifeCycle">
+            <End Role="LifeCycle" EntitySet="LifeCycles" />
+            <End Role="Attachment" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Company" Association="GIGModel.FK_Project_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Company" Association="GIGModel.FK_User_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIG_Contractor" Association="GIGModel.FK_GIG_Contractor">
+            <End Role="Contractor" EntitySet="Contractors" />
+            <End Role="GIG" EntitySet="GIGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Contractor" Association="GIGModel.FK_User_Contractor">
+            <End Role="Contractor" EntitySet="Contractors" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomLookup_LookupType" Association="GIGModel.FK_CustomLookup_LookupType">
+            <End Role="LookupType" EntitySet="LookupTypes" />
+            <End Role="CustomLookup" EntitySet="CustomLookups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Function_Tab" Association="GIGModel.FK_Function_Tab">
+            <End Role="Tab" EntitySet="Tabs" />
+            <End Role="Function" EntitySet="Functions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelXFunction_Function" Association="GIGModel.FK_LevelXFunction_Function">
+            <End Role="Function" EntitySet="Functions" />
+            <End Role="LevelXFunction" EntitySet="LevelXFunctions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FunctionXTab_Tab" Association="GIGModel.FK_FunctionXTab_Tab">
+            <End Role="Tab" EntitySet="Tabs" />
+            <End Role="FunctionXTab" EntitySet="FunctionXTabs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIG_UserXProjectXWorkFlowUserGroup" Association="GIGModel.FK_GIG_UserXProjectXWorkFlowUserGroup">
+            <End Role="UserXProjectXWorkFlowUserGroup" EntitySet="UserXProjectXWorkFlowUserGroups" />
+            <End Role="GIG" EntitySet="GIGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_GIG" Association="GIGModel.FK_LifeCycle_GIG">
+            <End Role="GIG" EntitySet="GIGs" />
+            <End Role="LifeCycle" EntitySet="LifeCycles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFInstance_GIG" Association="GIGModel.FK_UDFInstance_GIG">
+            <End Role="GIG" EntitySet="GIGs" />
+            <End Role="UDFInstance" EntitySet="UDFInstances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Level_WorkFlowUserGroup" Association="GIGModel.FK_Level_WorkFlowUserGroup">
+            <End Role="WorkFlowUserGroup" EntitySet="WorkFlowUserGroups" />
+            <End Role="Level" EntitySet="Levels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelXFunction_Level" Association="GIGModel.FK_LevelXFunction_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="LevelXFunction" EntitySet="LevelXFunctions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_Level" Association="GIGModel.FK_LifeCycle_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="LifeCycle" EntitySet="LifeCycles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LevelXFunction_LevelXFunction" Association="GIGModel.FK_LevelXFunction_LevelXFunction">
+            <End Role="LevelXFunction" EntitySet="LevelXFunctions" />
+            <End Role="LevelXFunction1" EntitySet="LevelXFunctions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_LevelXFunction" Association="GIGModel.FK_LifeCycle_LevelXFunction">
+            <End Role="LevelXFunction" EntitySet="LevelXFunctions" />
+            <End Role="LifeCycle" EntitySet="LifeCycles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_User" Association="GIGModel.FK_LifeCycle_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LifeCycle" EntitySet="LifeCycles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_User1" Association="GIGModel.FK_LifeCycle_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LifeCycle" EntitySet="LifeCycles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LifeCycle_User2" Association="GIGModel.FK_LifeCycle_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LifeCycle" EntitySet="LifeCycles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFDefinition_LookupType" Association="GIGModel.FK_UDFDefinition_LookupType">
+            <End Role="LookupType" EntitySet="LookupTypes" />
+            <End Role="UDFDefinition" EntitySet="UDFDefinitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFTemplate_LookupType" Association="GIGModel.FK_UDFTemplate_LookupType">
+            <End Role="LookupType" EntitySet="LookupTypes" />
+            <End Role="UDFTemplate" EntitySet="UDFTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFDefinition_Project" Association="GIGModel.FK_UDFDefinition_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="UDFDefinition" EntitySet="UDFDefinitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserXProjectXWorkFlowUserGroup_Project" Association="GIGModel.FK_UserXProjectXWorkFlowUserGroup_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="UserXProjectXWorkFlowUserGroup" EntitySet="UserXProjectXWorkFlowUserGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFDefinition_UDFType" Association="GIGModel.FK_UDFDefinition_UDFType">
+            <End Role="UDFType" EntitySet="UDFTypes" />
+            <End Role="UDFDefinition" EntitySet="UDFDefinitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFDefinition_Workflow" Association="GIGModel.FK_UDFDefinition_Workflow">
+            <End Role="Workflow" EntitySet="Workflows" />
+            <End Role="UDFDefinition" EntitySet="UDFDefinitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFInstance_UDFDefinition" Association="GIGModel.FK_UDFInstance_UDFDefinition">
+            <End Role="UDFDefinition" EntitySet="UDFDefinitions" />
+            <End Role="UDFInstance" EntitySet="UDFInstances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFValidation_UDFDefinition" Association="GIGModel.FK_UDFValidation_UDFDefinition">
+            <End Role="UDFDefinition" EntitySet="UDFDefinitions" />
+            <End Role="UDFValidation" EntitySet="UDFValidations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFTemplate_UDFType1" Association="GIGModel.FK_UDFTemplate_UDFType1">
+            <End Role="UDFType" EntitySet="UDFTypes" />
+            <End Role="UDFTemplate" EntitySet="UDFTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFTemplate_Workflow" Association="GIGModel.FK_UDFTemplate_Workflow">
+            <End Role="Workflow" EntitySet="Workflows" />
+            <End Role="UDFTemplate" EntitySet="UDFTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UDFValidation_UDFValidationDefinition" Association="GIGModel.FK_UDFValidation_UDFValidationDefinition">
+            <End Role="UDFValidationDefinition" EntitySet="UDFValidationDefinitions" />
+            <End Role="UDFValidation" EntitySet="UDFValidations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserXProjectXWorkFlowUserGroup_User" Association="GIGModel.FK_UserXProjectXWorkFlowUserGroup_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserXProjectXWorkFlowUserGroup" EntitySet="UserXProjectXWorkFlowUserGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup" Association="GIGModel.FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup">
+            <End Role="WorkFlowUserGroup" EntitySet="WorkFlowUserGroups" />
+            <End Role="UserXProjectXWorkFlowUserGroup" EntitySet="UserXProjectXWorkFlowUserGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowUserGroup_Workflow" Association="GIGModel.FK_WorkFlowUserGroup_Workflow">
+            <End Role="Workflow" EntitySet="Workflows" />
+            <End Role="WorkFlowUserGroup" EntitySet="WorkFlowUserGroups" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetActionsForLoggedInUser_Result">
+          <Property Type="Int32" Name="IDFunction" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Direction" Nullable="true" />
+          <Property Type="String" Name="PastTenseFunction" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IDTab" Nullable="true" />
+          <Property Type="Int32" Name="FunctionOrder" Nullable="false" />
+          <Property Type="Boolean" Name="IsAlignedLeft" Nullable="false" />
+          <Property Type="Int32" Name="IDLevelXFunction" Nullable="false" />
+          <Property Type="Boolean" Name="ISCreatedNotClosed" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetGIGCommunicationLog_Result">
+          <Property Type="Int32" Name="IDUPW" Nullable="false" />
+          <Property Type="Guid" Name="IDGig" Nullable="false" />
+          <Property Type="String" Name="Number" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DateRequired" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Originator" Nullable="false" MaxLength="356" />
+          <Property Type="Guid" Name="IDLifeCycle" Nullable="false" />
+          <Property Type="Int32" Name="LoggedById" Nullable="false" />
+          <Property Type="Int32" Name="OwnedByID" Nullable="true" />
+          <Property Type="Int32" Name="AssignedToID" Nullable="true" />
+          <Property Type="DateTime" Name="LoggedOn" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Detail" Nullable="true" />
+          <Property Type="Int32" Name="IDFunction" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PastTenseFunction" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AssignedBy" Nullable="true" MaxLength="356" />
+          <Property Type="String" Name="LoggedBy" Nullable="true" MaxLength="356" />
+          <Property Type="String" Name="OwnedBy" Nullable="true" MaxLength="356" />
+          <Property Type="Int32" Name="Sequence" Nullable="true" />
+          <Property Type="Int32" Name="IDFunctionTrigger" Nullable="true" />
+          <Property Type="String" Name="TriggerValue" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetProjectsList_Result">
+          <Property Type="Int32" Name="IDProject" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="IDCompany" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Int32" Name="IDUPW" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetUDFFieldsData_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="IDUDFDefinition" Nullable="false" />
+          <Property Type="Int32" Name="IDWorkflow" Nullable="false" />
+          <Property Type="Int32" Name="IDProject" Nullable="true" />
+          <Property Type="Int32" Name="IDUDFType" Nullable="true" />
+          <Property Type="String" Name="Label" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+          <Property Type="Boolean" Name="IsRequired" Nullable="false" />
+          <Property Type="String" Name="DefaultValue" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="IDLookupType" Nullable="true" />
+          <Property Type="Boolean" Name="CanEdit" Nullable="false" />
+          <Property Type="String" Name="Val1" Nullable="true" />
+          <Property Type="Guid" Name="IDUDFInstance" Nullable="true" />
+          <Property Type="String" Name="CustomLookupName" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetUDFFieldsValidations_Result">
+          <Property Type="String" Name="Message" Nullable="false" />
+          <Property Type="String" Name="ValidationType" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DefaultValue" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetUserWorkflow_Result">
+          <Property Type="Int32" Name="IDWorkflow" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDCompany" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetLevelXFunctionData_Result">
+          <Property Type="Int32" Name="IDLevelXFunction" Nullable="false" />
+          <Property Type="Int32" Name="IDLevel" Nullable="false" />
+          <Property Type="Int32" Name="IDFunction" Nullable="false" />
+          <Property Type="Boolean" Name="IsCreatedNotClosed" Nullable="true" />
+          <Property Type="Int32" Name="Sequence" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetActionsOnFirstLevel_Result">
+          <Property Type="Int32" Name="IDFunction" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Direction" Nullable="true" />
+          <Property Type="String" Name="PastTenseFunction" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IDTab" Nullable="true" />
+          <Property Type="Boolean" Name="IsAlignedLeft" Nullable="false" />
+          <Property Type="Int32" Name="FunctionOrder" Nullable="false" />
+          <Property Type="Int32" Name="sequence" Nullable="true" />
+          </ComplexType>
+        <ComplexType Name="RFI_GetGIGLogData_Result">
+          <Property Type="String" Name="PastTenseFunction" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Detail" Nullable="true" />
+          <Property Type="Guid" Name="IDLifeCycle" Nullable="false" />
+          <Property Type="String" Name="loggedbyFirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="loggedbyLastName" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="SendtoFirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SendtoLastName" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="Attachment_Count" Nullable="true" />
+          <Property Type="DateTime" Name="LoggedOn" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ImageName" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetCreateOption_Result">
+          <Property Type="Int32" Name="IDLevelXFunction" Nullable="false" />
+          <Property Type="Int32" Name="IDLevel" Nullable="false" />
+          <Property Type="Int32" Name="IDFunction" Nullable="false" />
+          <Property Type="Boolean" Name="IsCreatedNotClosed" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLevelDetailNextOrPrevious_Result">
+          <Property Type="Int32" Name="sequence" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="IDLevel" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RFI_GetSendto_Result">
+          <Property Type="Int32" Name="IDUser" Nullable="false" />
+          <Property Type="Int32" Name="IDCompany" Nullable="false" />
+          <Property Type="Int32" Name="IDContractor" Nullable="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="PhoneWork" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PhoneCell" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="IDAttachment" />
+          </Key>
+          <Property Name="IDAttachment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDLifeCycle" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LifeCycle" Relationship="GIGModel.FK_Attachment_LifeCycle" FromRole="Attachment" ToRole="LifeCycle" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="IDCompany" />
+          </Key>
+          <Property Name="IDCompany" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="GIGModel.FK_Project_Company" FromRole="Company" ToRole="Project" />
+          <NavigationProperty Name="Users" Relationship="GIGModel.FK_User_Company" FromRole="Company" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Contractor">
+          <Key>
+            <PropertyRef Name="IDContractor" />
+          </Key>
+          <Property Name="IDContractor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GIGs" Relationship="GIGModel.FK_GIG_Contractor" FromRole="Contractor" ToRole="GIG" />
+          <NavigationProperty Name="Users" Relationship="GIGModel.FK_User_Contractor" FromRole="Contractor" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CustomLookup">
+          <Key>
+            <PropertyRef Name="IDCustomLookup" />
+          </Key>
+          <Property Name="IDCustomLookup" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDLookupType" Type="Int32" Nullable="false" />
+          <Property Name="Val1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Val2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LookupType" Relationship="GIGModel.FK_CustomLookup_LookupType" FromRole="CustomLookup" ToRole="LookupType" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="IDFunction" />
+          </Key>
+          <Property Name="IDFunction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Direction" Type="Int32" />
+          <Property Name="PastTenseFunction" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="IDTab" Type="Int32" />
+          <Property Name="IsAlignedLeft" Type="Boolean" Nullable="false" />
+          <Property Name="FunctionOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tab" Relationship="GIGModel.FK_Function_Tab" FromRole="Function" ToRole="Tab" />
+          <NavigationProperty Name="LevelXFunctions" Relationship="GIGModel.FK_LevelXFunction_Function" FromRole="Function" ToRole="LevelXFunction" />
+        </EntityType>
+        <EntityType Name="FunctionXTab">
+          <Key>
+            <PropertyRef Name="IDFunctionXTab" />
+          </Key>
+          <Property Name="IDFunctionXTab" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDFunction" Type="Int32" Nullable="false" />
+          <Property Name="IDTab" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tab" Relationship="GIGModel.FK_FunctionXTab_Tab" FromRole="FunctionXTab" ToRole="Tab" />
+        </EntityType>
+        <EntityType Name="GIG">
+          <Key>
+            <PropertyRef Name="IDGig" />
+          </Key>
+          <Property Name="IDGig" Type="Guid" Nullable="false" />
+          <Property Name="IDUPW" Type="Int32" Nullable="false" />
+          <Property Name="IDContractor" Type="Int32" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="DateRequired" Type="DateTime" Precision="3" />
+          <Property Name="ContractorGIGNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contractor" Relationship="GIGModel.FK_GIG_Contractor" FromRole="GIG" ToRole="Contractor" />
+          <NavigationProperty Name="UserXProjectXWorkFlowUserGroup" Relationship="GIGModel.FK_GIG_UserXProjectXWorkFlowUserGroup" FromRole="GIG" ToRole="UserXProjectXWorkFlowUserGroup" />
+          <NavigationProperty Name="LifeCycles" Relationship="GIGModel.FK_LifeCycle_GIG" FromRole="GIG" ToRole="LifeCycle" />
+          <NavigationProperty Name="UDFInstances" Relationship="GIGModel.FK_UDFInstance_GIG" FromRole="GIG" ToRole="UDFInstance" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="IDLevel" />
+          </Key>
+          <Property Name="IDLevel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDWorkFlowUserGroup" Type="Int32" Nullable="false" />
+          <Property Name="Sequence" Type="Int32" />
+          <Property Name="ISDisplayContractorGIGNumber" Type="Boolean" Nullable="false" />
+          <Property Name="ISDisplayContractor" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="WorkFlowUserGroup" Relationship="GIGModel.FK_Level_WorkFlowUserGroup" FromRole="Level" ToRole="WorkFlowUserGroup" />
+          <NavigationProperty Name="LevelXFunctions" Relationship="GIGModel.FK_LevelXFunction_Level" FromRole="Level" ToRole="LevelXFunction" />
+          <NavigationProperty Name="LifeCycles" Relationship="GIGModel.FK_LifeCycle_Level" FromRole="Level" ToRole="LifeCycle" />
+        </EntityType>
+        <EntityType Name="LevelXFunction">
+          <Key>
+            <PropertyRef Name="IDLevelXFunction" />
+          </Key>
+          <Property Name="IDLevelXFunction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDLevel" Type="Int32" Nullable="false" />
+          <Property Name="IDFunction" Type="Int32" Nullable="false" />
+          <Property Name="IsCreatedNotClosed" Type="Boolean" />
+          <Property Name="IDFunctionTrigger" Type="Int32" />
+          <NavigationProperty Name="Function" Relationship="GIGModel.FK_LevelXFunction_Function" FromRole="LevelXFunction" ToRole="Function" />
+          <NavigationProperty Name="Level" Relationship="GIGModel.FK_LevelXFunction_Level" FromRole="LevelXFunction" ToRole="Level" />
+          <NavigationProperty Name="LevelXFunction1" Relationship="GIGModel.FK_LevelXFunction_LevelXFunction" FromRole="LevelXFunction" ToRole="LevelXFunction1" />
+          <NavigationProperty Name="LevelXFunction2" Relationship="GIGModel.FK_LevelXFunction_LevelXFunction" FromRole="LevelXFunction1" ToRole="LevelXFunction" />
+          <NavigationProperty Name="LifeCycles" Relationship="GIGModel.FK_LifeCycle_LevelXFunction" FromRole="LevelXFunction" ToRole="LifeCycle" />
+        </EntityType>
+        <EntityType Name="LifeCycle">
+          <Key>
+            <PropertyRef Name="IDLifeCycle" />
+          </Key>
+          <Property Name="IDLifeCycle" Type="Guid" Nullable="false" />
+          <Property Name="IDGig" Type="Guid" Nullable="false" />
+          <Property Name="IDLevelXFunction" Type="Int32" />
+          <Property Name="LoggedByID" Type="Int32" Nullable="false" />
+          <Property Name="OwnedByID" Type="Int32" />
+          <Property Name="AssignedToID" Type="Int32" />
+          <Property Name="LoggedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ISSubmitted" Type="Boolean" Nullable="false" />
+          <Property Name="IDLevel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attachments" Relationship="GIGModel.FK_Attachment_LifeCycle" FromRole="LifeCycle" ToRole="Attachment" />
+          <NavigationProperty Name="GIG" Relationship="GIGModel.FK_LifeCycle_GIG" FromRole="LifeCycle" ToRole="GIG" />
+          <NavigationProperty Name="Level" Relationship="GIGModel.FK_LifeCycle_Level" FromRole="LifeCycle" ToRole="Level" />
+          <NavigationProperty Name="LevelXFunction" Relationship="GIGModel.FK_LifeCycle_LevelXFunction" FromRole="LifeCycle" ToRole="LevelXFunction" />
+          <NavigationProperty Name="User" Relationship="GIGModel.FK_LifeCycle_User" FromRole="LifeCycle" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="GIGModel.FK_LifeCycle_User1" FromRole="LifeCycle" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="GIGModel.FK_LifeCycle_User2" FromRole="LifeCycle" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LookupType">
+          <Key>
+            <PropertyRef Name="IDLookupType" />
+          </Key>
+          <Property Name="IDLookupType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CustomLookups" Relationship="GIGModel.FK_CustomLookup_LookupType" FromRole="LookupType" ToRole="CustomLookup" />
+          <NavigationProperty Name="UDFDefinitions" Relationship="GIGModel.FK_UDFDefinition_LookupType" FromRole="LookupType" ToRole="UDFDefinition" />
+          <NavigationProperty Name="UDFTemplates" Relationship="GIGModel.FK_UDFTemplate_LookupType" FromRole="LookupType" ToRole="UDFTemplate" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="IDProject" />
+          </Key>
+          <Property Name="IDProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCompany" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="GIGModel.FK_Project_Company" FromRole="Project" ToRole="Company" />
+          <NavigationProperty Name="UDFDefinitions" Relationship="GIGModel.FK_UDFDefinition_Project" FromRole="Project" ToRole="UDFDefinition" />
+          <NavigationProperty Name="UserXProjectXWorkFlowUserGroups" Relationship="GIGModel.FK_UserXProjectXWorkFlowUserGroup_Project" FromRole="Project" ToRole="UserXProjectXWorkFlowUserGroup" />
+        </EntityType>
+        <EntityType Name="Tab">
+          <Key>
+            <PropertyRef Name="IDTab" />
+          </Key>
+          <Property Name="IDTab" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tab1" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Functions" Relationship="GIGModel.FK_Function_Tab" FromRole="Tab" ToRole="Function" />
+          <NavigationProperty Name="FunctionXTabs" Relationship="GIGModel.FK_FunctionXTab_Tab" FromRole="Tab" ToRole="FunctionXTab" />
+        </EntityType>
+        <EntityType Name="UDFDefinition">
+          <Key>
+            <PropertyRef Name="IDUDFDefinition" />
+          </Key>
+          <Property Name="IDUDFDefinition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDWorkflow" Type="Int32" Nullable="false" />
+          <Property Name="IDProject" Type="Int32" />
+          <Property Name="IDUDFType" Type="Int32" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <Property Name="IsRequired" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IDLookupType" Type="Int32" />
+          <Property Name="CanEdit" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LookupType" Relationship="GIGModel.FK_UDFDefinition_LookupType" FromRole="UDFDefinition" ToRole="LookupType" />
+          <NavigationProperty Name="Project" Relationship="GIGModel.FK_UDFDefinition_Project" FromRole="UDFDefinition" ToRole="Project" />
+          <NavigationProperty Name="UDFType" Relationship="GIGModel.FK_UDFDefinition_UDFType" FromRole="UDFDefinition" ToRole="UDFType" />
+          <NavigationProperty Name="Workflow" Relationship="GIGModel.FK_UDFDefinition_Workflow" FromRole="UDFDefinition" ToRole="Workflow" />
+          <NavigationProperty Name="UDFInstances" Relationship="GIGModel.FK_UDFInstance_UDFDefinition" FromRole="UDFDefinition" ToRole="UDFInstance" />
+          <NavigationProperty Name="UDFValidations" Relationship="GIGModel.FK_UDFValidation_UDFDefinition" FromRole="UDFDefinition" ToRole="UDFValidation" />
+        </EntityType>
+        <EntityType Name="UDFInstance">
+          <Key>
+            <PropertyRef Name="IDUDFInstance" />
+          </Key>
+          <Property Name="IDUDFInstance" Type="Guid" Nullable="false" />
+          <Property Name="IDGig" Type="Guid" Nullable="false" />
+          <Property Name="IDUDFDefinition" Type="Int32" Nullable="false" />
+          <Property Name="Val1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GIG" Relationship="GIGModel.FK_UDFInstance_GIG" FromRole="UDFInstance" ToRole="GIG" />
+          <NavigationProperty Name="UDFDefinition" Relationship="GIGModel.FK_UDFInstance_UDFDefinition" FromRole="UDFInstance" ToRole="UDFDefinition" />
+        </EntityType>
+        <EntityType Name="UDFTemplate">
+          <Key>
+            <PropertyRef Name="IDUDFTemplate" />
+          </Key>
+          <Property Name="IDUDFTemplate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDWorkflow" Type="Int32" Nullable="false" />
+          <Property Name="IDUDFType" Type="Int32" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <Property Name="IsRequired" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IDLookupType" Type="Int32" />
+          <Property Name="CanEdit" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LookupType" Relationship="GIGModel.FK_UDFTemplate_LookupType" FromRole="UDFTemplate" ToRole="LookupType" />
+          <NavigationProperty Name="UDFType" Relationship="GIGModel.FK_UDFTemplate_UDFType1" FromRole="UDFTemplate" ToRole="UDFType" />
+          <NavigationProperty Name="Workflow" Relationship="GIGModel.FK_UDFTemplate_Workflow" FromRole="UDFTemplate" ToRole="Workflow" />
+        </EntityType>
+        <EntityType Name="UDFType">
+          <Key>
+            <PropertyRef Name="IDUDFType" />
+          </Key>
+          <Property Name="IDUDFType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UDFDefinitions" Relationship="GIGModel.FK_UDFDefinition_UDFType" FromRole="UDFType" ToRole="UDFDefinition" />
+          <NavigationProperty Name="UDFTemplates" Relationship="GIGModel.FK_UDFTemplate_UDFType1" FromRole="UDFType" ToRole="UDFTemplate" />
+        </EntityType>
+        <EntityType Name="UDFValidation">
+          <Key>
+            <PropertyRef Name="IDUDFValidation" />
+          </Key>
+          <Property Name="IDUDFValidation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUDFDefinition" Type="Int32" Nullable="false" />
+          <Property Name="IDUDFValidationDefinition" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UDFDefinition" Relationship="GIGModel.FK_UDFValidation_UDFDefinition" FromRole="UDFValidation" ToRole="UDFDefinition" />
+          <NavigationProperty Name="UDFValidationDefinition" Relationship="GIGModel.FK_UDFValidation_UDFValidationDefinition" FromRole="UDFValidation" ToRole="UDFValidationDefinition" />
+        </EntityType>
+        <EntityType Name="UDFValidationDefinition">
+          <Key>
+            <PropertyRef Name="IDUDFValidationDefinition" />
+          </Key>
+          <Property Name="IDUDFValidationDefinition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ValidationType" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UDFValidations" Relationship="GIGModel.FK_UDFValidation_UDFValidationDefinition" FromRole="UDFValidationDefinition" ToRole="UDFValidation" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCompany" Type="Int32" Nullable="false" />
+          <Property Name="IDContractor" Type="Int32" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneWork" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneCell" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="GIGModel.FK_User_Company" FromRole="User" ToRole="Company" />
+          <NavigationProperty Name="Contractor" Relationship="GIGModel.FK_User_Contractor" FromRole="User" ToRole="Contractor" />
+          <NavigationProperty Name="LifeCycles" Relationship="GIGModel.FK_LifeCycle_User" FromRole="User" ToRole="LifeCycle" />
+          <NavigationProperty Name="LifeCycles1" Relationship="GIGModel.FK_LifeCycle_User1" FromRole="User" ToRole="LifeCycle" />
+          <NavigationProperty Name="LifeCycles2" Relationship="GIGModel.FK_LifeCycle_User2" FromRole="User" ToRole="LifeCycle" />
+          <NavigationProperty Name="UserXProjectXWorkFlowUserGroups" Relationship="GIGModel.FK_UserXProjectXWorkFlowUserGroup_User" FromRole="User" ToRole="UserXProjectXWorkFlowUserGroup" />
+        </EntityType>
+        <EntityType Name="UserXProjectXWorkFlowUserGroup">
+          <Key>
+            <PropertyRef Name="IDUPW" />
+          </Key>
+          <Property Name="IDUPW" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="IDProject" Type="Int32" Nullable="false" />
+          <Property Name="IDWorkFlowUserGroup" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GIGs" Relationship="GIGModel.FK_GIG_UserXProjectXWorkFlowUserGroup" FromRole="UserXProjectXWorkFlowUserGroup" ToRole="GIG" />
+          <NavigationProperty Name="Project" Relationship="GIGModel.FK_UserXProjectXWorkFlowUserGroup_Project" FromRole="UserXProjectXWorkFlowUserGroup" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="GIGModel.FK_UserXProjectXWorkFlowUserGroup_User" FromRole="UserXProjectXWorkFlowUserGroup" ToRole="User" />
+          <NavigationProperty Name="WorkFlowUserGroup" Relationship="GIGModel.FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup" FromRole="UserXProjectXWorkFlowUserGroup" ToRole="WorkFlowUserGroup" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="IDWorkflow" />
+          </Key>
+          <Property Name="IDWorkflow" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDProjectTemplate" Type="Int32" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UDFDefinitions" Relationship="GIGModel.FK_UDFDefinition_Workflow" FromRole="Workflow" ToRole="UDFDefinition" />
+          <NavigationProperty Name="UDFTemplates" Relationship="GIGModel.FK_UDFTemplate_Workflow" FromRole="Workflow" ToRole="UDFTemplate" />
+          <NavigationProperty Name="WorkFlowUserGroups" Relationship="GIGModel.FK_WorkFlowUserGroup_Workflow" FromRole="Workflow" ToRole="WorkFlowUserGroup" />
+        </EntityType>
+        <EntityType Name="WorkFlowUserGroup">
+          <Key>
+            <PropertyRef Name="IDWorkFlowUserGroup" />
+          </Key>
+          <Property Name="IDWorkFlowUserGroup" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDWorkFlow" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Levels" Relationship="GIGModel.FK_Level_WorkFlowUserGroup" FromRole="WorkFlowUserGroup" ToRole="Level" />
+          <NavigationProperty Name="UserXProjectXWorkFlowUserGroups" Relationship="GIGModel.FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup" FromRole="WorkFlowUserGroup" ToRole="UserXProjectXWorkFlowUserGroup" />
+          <NavigationProperty Name="Workflow" Relationship="GIGModel.FK_WorkFlowUserGroup_Workflow" FromRole="WorkFlowUserGroup" ToRole="Workflow" />
+        </EntityType>
+        <Association Name="FK_Attachment_LifeCycle">
+          <End Type="GIGModel.LifeCycle" Role="LifeCycle" Multiplicity="1" />
+          <End Type="GIGModel.Attachment" Role="Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LifeCycle">
+              <PropertyRef Name="IDLifeCycle" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="IDLifeCycle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Company">
+          <End Type="GIGModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="GIGModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="IDCompany" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="IDCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Company">
+          <End Type="GIGModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="GIGModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="IDCompany" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIG_Contractor">
+          <End Type="GIGModel.Contractor" Role="Contractor" Multiplicity="0..1" />
+          <End Type="GIGModel.GIG" Role="GIG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractor">
+              <PropertyRef Name="IDContractor" />
+            </Principal>
+            <Dependent Role="GIG">
+              <PropertyRef Name="IDContractor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Contractor">
+          <End Type="GIGModel.Contractor" Role="Contractor" Multiplicity="0..1" />
+          <End Type="GIGModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractor">
+              <PropertyRef Name="IDContractor" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDContractor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomLookup_LookupType">
+          <End Type="GIGModel.LookupType" Role="LookupType" Multiplicity="1" />
+          <End Type="GIGModel.CustomLookup" Role="CustomLookup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="IDLookupType" />
+            </Principal>
+            <Dependent Role="CustomLookup">
+              <PropertyRef Name="IDLookupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Function_Tab">
+          <End Type="GIGModel.Tab" Role="Tab" Multiplicity="0..1" />
+          <End Type="GIGModel.Function" Role="Function" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab">
+              <PropertyRef Name="IDTab" />
+            </Principal>
+            <Dependent Role="Function">
+              <PropertyRef Name="IDTab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelXFunction_Function">
+          <End Type="GIGModel.Function" Role="Function" Multiplicity="1" />
+          <End Type="GIGModel.LevelXFunction" Role="LevelXFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Function">
+              <PropertyRef Name="IDFunction" />
+            </Principal>
+            <Dependent Role="LevelXFunction">
+              <PropertyRef Name="IDFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FunctionXTab_Tab">
+          <End Type="GIGModel.Tab" Role="Tab" Multiplicity="1" />
+          <End Type="GIGModel.FunctionXTab" Role="FunctionXTab" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab">
+              <PropertyRef Name="IDTab" />
+            </Principal>
+            <Dependent Role="FunctionXTab">
+              <PropertyRef Name="IDTab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIG_UserXProjectXWorkFlowUserGroup">
+          <End Type="GIGModel.UserXProjectXWorkFlowUserGroup" Role="UserXProjectXWorkFlowUserGroup" Multiplicity="1" />
+          <End Type="GIGModel.GIG" Role="GIG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserXProjectXWorkFlowUserGroup">
+              <PropertyRef Name="IDUPW" />
+            </Principal>
+            <Dependent Role="GIG">
+              <PropertyRef Name="IDUPW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_GIG">
+          <End Type="GIGModel.GIG" Role="GIG" Multiplicity="1" />
+          <End Type="GIGModel.LifeCycle" Role="LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIG">
+              <PropertyRef Name="IDGig" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="IDGig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFInstance_GIG">
+          <End Type="GIGModel.GIG" Role="GIG" Multiplicity="1" />
+          <End Type="GIGModel.UDFInstance" Role="UDFInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIG">
+              <PropertyRef Name="IDGig" />
+            </Principal>
+            <Dependent Role="UDFInstance">
+              <PropertyRef Name="IDGig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Level_WorkFlowUserGroup">
+          <End Type="GIGModel.WorkFlowUserGroup" Role="WorkFlowUserGroup" Multiplicity="1" />
+          <End Type="GIGModel.Level" Role="Level" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkFlowUserGroup">
+              <PropertyRef Name="IDWorkFlowUserGroup" />
+            </Principal>
+            <Dependent Role="Level">
+              <PropertyRef Name="IDWorkFlowUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelXFunction_Level">
+          <End Type="GIGModel.Level" Role="Level" Multiplicity="1" />
+          <End Type="GIGModel.LevelXFunction" Role="LevelXFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="IDLevel" />
+            </Principal>
+            <Dependent Role="LevelXFunction">
+              <PropertyRef Name="IDLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_Level">
+          <End Type="GIGModel.Level" Role="Level" Multiplicity="1" />
+          <End Type="GIGModel.LifeCycle" Role="LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="IDLevel" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="IDLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LevelXFunction_LevelXFunction">
+          <End Type="GIGModel.LevelXFunction" Role="LevelXFunction" Multiplicity="1" />
+          <End Type="GIGModel.LevelXFunction" Role="LevelXFunction1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LevelXFunction">
+              <PropertyRef Name="IDLevelXFunction" />
+            </Principal>
+            <Dependent Role="LevelXFunction1">
+              <PropertyRef Name="IDLevelXFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_LevelXFunction">
+          <End Type="GIGModel.LevelXFunction" Role="LevelXFunction" Multiplicity="0..1" />
+          <End Type="GIGModel.LifeCycle" Role="LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelXFunction">
+              <PropertyRef Name="IDLevelXFunction" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="IDLevelXFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_User">
+          <End Type="GIGModel.User" Role="User" Multiplicity="1" />
+          <End Type="GIGModel.LifeCycle" Role="LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="LoggedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_User1">
+          <End Type="GIGModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="GIGModel.LifeCycle" Role="LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="OwnedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LifeCycle_User2">
+          <End Type="GIGModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="GIGModel.LifeCycle" Role="LifeCycle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="LifeCycle">
+              <PropertyRef Name="AssignedToID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFDefinition_LookupType">
+          <End Type="GIGModel.LookupType" Role="LookupType" Multiplicity="0..1" />
+          <End Type="GIGModel.UDFDefinition" Role="UDFDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="IDLookupType" />
+            </Principal>
+            <Dependent Role="UDFDefinition">
+              <PropertyRef Name="IDLookupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFTemplate_LookupType">
+          <End Type="GIGModel.LookupType" Role="LookupType" Multiplicity="0..1" />
+          <End Type="GIGModel.UDFTemplate" Role="UDFTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="IDLookupType" />
+            </Principal>
+            <Dependent Role="UDFTemplate">
+              <PropertyRef Name="IDLookupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFDefinition_Project">
+          <End Type="GIGModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="GIGModel.UDFDefinition" Role="UDFDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="IDProject" />
+            </Principal>
+            <Dependent Role="UDFDefinition">
+              <PropertyRef Name="IDProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserXProjectXWorkFlowUserGroup_Project">
+          <End Type="GIGModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="GIGModel.UserXProjectXWorkFlowUserGroup" Role="UserXProjectXWorkFlowUserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="IDProject" />
+            </Principal>
+            <Dependent Role="UserXProjectXWorkFlowUserGroup">
+              <PropertyRef Name="IDProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFDefinition_UDFType">
+          <End Type="GIGModel.UDFType" Role="UDFType" Multiplicity="0..1" />
+          <End Type="GIGModel.UDFDefinition" Role="UDFDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFType">
+              <PropertyRef Name="IDUDFType" />
+            </Principal>
+            <Dependent Role="UDFDefinition">
+              <PropertyRef Name="IDUDFType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFDefinition_Workflow">
+          <End Type="GIGModel.Workflow" Role="Workflow" Multiplicity="1" />
+          <End Type="GIGModel.UDFDefinition" Role="UDFDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="IDWorkflow" />
+            </Principal>
+            <Dependent Role="UDFDefinition">
+              <PropertyRef Name="IDWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFInstance_UDFDefinition">
+          <End Type="GIGModel.UDFDefinition" Role="UDFDefinition" Multiplicity="1" />
+          <End Type="GIGModel.UDFInstance" Role="UDFInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFDefinition">
+              <PropertyRef Name="IDUDFDefinition" />
+            </Principal>
+            <Dependent Role="UDFInstance">
+              <PropertyRef Name="IDUDFDefinition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFValidation_UDFDefinition">
+          <End Type="GIGModel.UDFDefinition" Role="UDFDefinition" Multiplicity="1" />
+          <End Type="GIGModel.UDFValidation" Role="UDFValidation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFDefinition">
+              <PropertyRef Name="IDUDFDefinition" />
+            </Principal>
+            <Dependent Role="UDFValidation">
+              <PropertyRef Name="IDUDFDefinition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFTemplate_UDFType1">
+          <End Type="GIGModel.UDFType" Role="UDFType" Multiplicity="0..1" />
+          <End Type="GIGModel.UDFTemplate" Role="UDFTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFType">
+              <PropertyRef Name="IDUDFType" />
+            </Principal>
+            <Dependent Role="UDFTemplate">
+              <PropertyRef Name="IDUDFType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFTemplate_Workflow">
+          <End Type="GIGModel.Workflow" Role="Workflow" Multiplicity="1" />
+          <End Type="GIGModel.UDFTemplate" Role="UDFTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="IDWorkflow" />
+            </Principal>
+            <Dependent Role="UDFTemplate">
+              <PropertyRef Name="IDWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UDFValidation_UDFValidationDefinition">
+          <End Type="GIGModel.UDFValidationDefinition" Role="UDFValidationDefinition" Multiplicity="1" />
+          <End Type="GIGModel.UDFValidation" Role="UDFValidation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UDFValidationDefinition">
+              <PropertyRef Name="IDUDFValidationDefinition" />
+            </Principal>
+            <Dependent Role="UDFValidation">
+              <PropertyRef Name="IDUDFValidationDefinition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserXProjectXWorkFlowUserGroup_User">
+          <End Type="GIGModel.User" Role="User" Multiplicity="1" />
+          <End Type="GIGModel.UserXProjectXWorkFlowUserGroup" Role="UserXProjectXWorkFlowUserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="UserXProjectXWorkFlowUserGroup">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup">
+          <End Type="GIGModel.WorkFlowUserGroup" Role="WorkFlowUserGroup" Multiplicity="1" />
+          <End Type="GIGModel.UserXProjectXWorkFlowUserGroup" Role="UserXProjectXWorkFlowUserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkFlowUserGroup">
+              <PropertyRef Name="IDWorkFlowUserGroup" />
+            </Principal>
+            <Dependent Role="UserXProjectXWorkFlowUserGroup">
+              <PropertyRef Name="IDWorkFlowUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowUserGroup_Workflow">
+          <End Type="GIGModel.Workflow" Role="Workflow" Multiplicity="1" />
+          <End Type="GIGModel.WorkFlowUserGroup" Role="WorkFlowUserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="IDWorkflow" />
+            </Principal>
+            <Dependent Role="WorkFlowUserGroup">
+              <PropertyRef Name="IDWorkFlow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GIGModelStoreContainer" CdmEntityContainer="GIGEntities">
+          <FunctionImportMapping FunctionImportName="RFI_GetActionsForLoggedInUser" FunctionName="GIGModel.Store.RFI_GetActionsForLoggedInUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetActionsForLoggedInUser_Result">
+                <ScalarProperty Name="IDFunction" ColumnName="IDFunction" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="PastTenseFunction" ColumnName="PastTenseFunction" />
+                <ScalarProperty Name="IDTab" ColumnName="IDTab" />
+                <ScalarProperty Name="FunctionOrder" ColumnName="FunctionOrder" />
+                <ScalarProperty Name="IsAlignedLeft" ColumnName="IsAlignedLeft" />
+                <ScalarProperty Name="IDLevelXFunction" ColumnName="IDLevelXFunction" />
+                <ScalarProperty Name="ISCreatedNotClosed" ColumnName="ISCreatedNotClosed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetGIGCommunicationCounts" FunctionName="GIGModel.Store.RFI_GetGIGCommunicationCounts" />
+          <FunctionImportMapping FunctionImportName="RFI_GetGIGCommunicationLog" FunctionName="GIGModel.Store.RFI_GetGIGCommunicationLog">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetGIGCommunicationLog_Result">
+                <ScalarProperty Name="IDUPW" ColumnName="IDUPW" />
+                <ScalarProperty Name="IDGig" ColumnName="IDGig" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateRequired" ColumnName="DateRequired" />
+                <ScalarProperty Name="Originator" ColumnName="Originator" />
+                <ScalarProperty Name="IDLifeCycle" ColumnName="IDLifeCycle" />
+                <ScalarProperty Name="LoggedById" ColumnName="LoggedById" />
+                <ScalarProperty Name="OwnedByID" ColumnName="OwnedByID" />
+                <ScalarProperty Name="AssignedToID" ColumnName="AssignedToID" />
+                <ScalarProperty Name="LoggedOn" ColumnName="LoggedOn" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="IDFunction" ColumnName="IDFunction" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PastTenseFunction" ColumnName="PastTenseFunction" />
+                <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
+                <ScalarProperty Name="LoggedBy" ColumnName="LoggedBy" />
+                <ScalarProperty Name="OwnedBy" ColumnName="OwnedBy" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="IDFunctionTrigger" ColumnName="IDFunctionTrigger" />
+                <ScalarProperty Name="TriggerValue" ColumnName="TriggerValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetProjectsList" FunctionName="GIGModel.Store.RFI_GetProjectsList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetProjectsList_Result">
+                <ScalarProperty Name="IDProject" ColumnName="IDProject" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDCompany" ColumnName="IDCompany" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IDUPW" ColumnName="IDUPW" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetUDFFieldsData" FunctionName="GIGModel.Store.RFI_GetUDFFieldsData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetUDFFieldsData_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDUDFDefinition" ColumnName="IDUDFDefinition" />
+                <ScalarProperty Name="IDWorkflow" ColumnName="IDWorkflow" />
+                <ScalarProperty Name="IDProject" ColumnName="IDProject" />
+                <ScalarProperty Name="IDUDFType" ColumnName="IDUDFType" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="IDLookupType" ColumnName="IDLookupType" />
+                <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
+                <ScalarProperty Name="Val1" ColumnName="Val1" />
+                <ScalarProperty Name="IDUDFInstance" ColumnName="IDUDFInstance" />
+                <ScalarProperty Name="CustomLookupName" ColumnName="CustomLookupName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetUDFFieldsValidations" FunctionName="GIGModel.Store.RFI_GetUDFFieldsValidations">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetUDFFieldsValidations_Result">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ValidationType" ColumnName="ValidationType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetUserWorkflow" FunctionName="GIGModel.Store.RFI_GetUserWorkflow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetUserWorkflow_Result">
+                <ScalarProperty Name="IDWorkflow" ColumnName="IDWorkflow" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDCompany" ColumnName="IDCompany" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetLevelXFunctionData" FunctionName="GIGModel.Store.RFI_GetLevelXFunctionData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetLevelXFunctionData_Result">
+                <ScalarProperty Name="IDLevelXFunction" ColumnName="IDLevelXFunction" />
+                <ScalarProperty Name="IDLevel" ColumnName="IDLevel" />
+                <ScalarProperty Name="IDFunction" ColumnName="IDFunction" />
+                <ScalarProperty Name="IsCreatedNotClosed" ColumnName="IsCreatedNotClosed" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetActionsOnFirstLevel" FunctionName="GIGModel.Store.RFI_GetActionsOnFirstLevel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetActionsOnFirstLevel_Result">
+                <ScalarProperty Name="IDFunction" ColumnName="IDFunction" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="PastTenseFunction" ColumnName="PastTenseFunction" />
+                <ScalarProperty Name="IDTab" ColumnName="IDTab" />
+                <ScalarProperty Name="IsAlignedLeft" ColumnName="IsAlignedLeft" />
+                <ScalarProperty Name="FunctionOrder" ColumnName="FunctionOrder" />
+                <ScalarProperty Name="sequence" ColumnName="sequence" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetGIGLogData" FunctionName="GIGModel.Store.RFI_GetGIGLogData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetGIGLogData_Result">
+                <ScalarProperty Name="PastTenseFunction" ColumnName="PastTenseFunction" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="IDLifeCycle" ColumnName="IDLifeCycle" />
+                <ScalarProperty Name="loggedbyFirstName" ColumnName="loggedbyFirstName" />
+                <ScalarProperty Name="loggedbyLastName" ColumnName="loggedbyLastName" />
+                <ScalarProperty Name="SendtoFirstName" ColumnName="SendtoFirstName" />
+                <ScalarProperty Name="SendtoLastName" ColumnName="SendtoLastName" />
+                <ScalarProperty Name="Attachment_Count" ColumnName="Attachment_Count" />
+                <ScalarProperty Name="LoggedOn" ColumnName="LoggedOn" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetCreateOption" FunctionName="GIGModel.Store.RFI_GetCreateOption">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetCreateOption_Result">
+                <ScalarProperty Name="IDLevelXFunction" ColumnName="IDLevelXFunction" />
+                <ScalarProperty Name="IDLevel" ColumnName="IDLevel" />
+                <ScalarProperty Name="IDFunction" ColumnName="IDFunction" />
+                <ScalarProperty Name="IsCreatedNotClosed" ColumnName="IsCreatedNotClosed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLevelDetailNextOrPrevious" FunctionName="GIGModel.Store.GetLevelDetailNextOrPrevious">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.GetLevelDetailNextOrPrevious_Result">
+                <ScalarProperty Name="sequence" ColumnName="sequence" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDLevel" ColumnName="IDLevel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetSendto" FunctionName="GIGModel.Store.RFI_GetSendto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GIGModel.RFI_GetSendto_Result">
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDCompany" ColumnName="IDCompany" />
+                <ScalarProperty Name="IDContractor" ColumnName="IDContractor" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PhoneWork" ColumnName="PhoneWork" />
+                <ScalarProperty Name="PhoneCell" ColumnName="PhoneCell" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RFI_GetUSercurrentLevelsCount" FunctionName="GIGModel.Store.RFI_GetUSercurrentLevelsCount" />
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="GIGModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDLifeCycle" ColumnName="IDLifeCycle" />
+                <ScalarProperty Name="IDAttachment" ColumnName="IDAttachment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="GIGModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDCompany" ColumnName="IDCompany" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contractors">
+            <EntityTypeMapping TypeName="GIGModel.Contractor">
+              <MappingFragment StoreEntitySet="Contractor">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDContractor" ColumnName="IDContractor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomLookups">
+            <EntityTypeMapping TypeName="GIGModel.CustomLookup">
+              <MappingFragment StoreEntitySet="CustomLookup">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Val2" ColumnName="Val2" />
+                <ScalarProperty Name="Val1" ColumnName="Val1" />
+                <ScalarProperty Name="IDLookupType" ColumnName="IDLookupType" />
+                <ScalarProperty Name="IDCustomLookup" ColumnName="IDCustomLookup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Functions">
+            <EntityTypeMapping TypeName="GIGModel.Function">
+              <MappingFragment StoreEntitySet="Function">
+                <ScalarProperty Name="FunctionOrder" ColumnName="FunctionOrder" />
+                <ScalarProperty Name="IsAlignedLeft" ColumnName="IsAlignedLeft" />
+                <ScalarProperty Name="IDTab" ColumnName="IDTab" />
+                <ScalarProperty Name="PastTenseFunction" ColumnName="PastTenseFunction" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDFunction" ColumnName="IDFunction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FunctionXTabs">
+            <EntityTypeMapping TypeName="GIGModel.FunctionXTab">
+              <MappingFragment StoreEntitySet="FunctionXTab">
+                <ScalarProperty Name="IDTab" ColumnName="IDTab" />
+                <ScalarProperty Name="IDFunction" ColumnName="IDFunction" />
+                <ScalarProperty Name="IDFunctionXTab" ColumnName="IDFunctionXTab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GIGs">
+            <EntityTypeMapping TypeName="GIGModel.GIG">
+              <MappingFragment StoreEntitySet="GIG">
+                <ScalarProperty Name="ContractorGIGNumber" ColumnName="ContractorGIGNumber" />
+                <ScalarProperty Name="DateRequired" ColumnName="DateRequired" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="IDContractor" ColumnName="IDContractor" />
+                <ScalarProperty Name="IDUPW" ColumnName="IDUPW" />
+                <ScalarProperty Name="IDGig" ColumnName="IDGig" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Levels">
+            <EntityTypeMapping TypeName="GIGModel.Level">
+              <MappingFragment StoreEntitySet="Level">
+                <ScalarProperty Name="ISDisplayContractor" ColumnName="ISDisplayContractor" />
+                <ScalarProperty Name="ISDisplayContractorGIGNumber" ColumnName="ISDisplayContractorGIGNumber" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="IDWorkFlowUserGroup" ColumnName="IDWorkFlowUserGroup" />
+                <ScalarProperty Name="IDLevel" ColumnName="IDLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelXFunctions">
+            <EntityTypeMapping TypeName="GIGModel.LevelXFunction">
+              <MappingFragment StoreEntitySet="LevelXFunction">
+                <ScalarProperty Name="IDFunctionTrigger" ColumnName="IDFunctionTrigger" />
+                <ScalarProperty Name="IsCreatedNotClosed" ColumnName="IsCreatedNotClosed" />
+                <ScalarProperty Name="IDFunction" ColumnName="IDFunction" />
+                <ScalarProperty Name="IDLevel" ColumnName="IDLevel" />
+                <ScalarProperty Name="IDLevelXFunction" ColumnName="IDLevelXFunction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LifeCycles">
+            <EntityTypeMapping TypeName="GIGModel.LifeCycle">
+              <MappingFragment StoreEntitySet="LifeCycle">
+                <ScalarProperty Name="IDLevel" ColumnName="IDLevel" />
+                <ScalarProperty Name="ISSubmitted" ColumnName="ISSubmitted" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="LoggedOn" ColumnName="LoggedOn" />
+                <ScalarProperty Name="AssignedToID" ColumnName="AssignedToID" />
+                <ScalarProperty Name="OwnedByID" ColumnName="OwnedByID" />
+                <ScalarProperty Name="LoggedByID" ColumnName="LoggedByID" />
+                <ScalarProperty Name="IDLevelXFunction" ColumnName="IDLevelXFunction" />
+                <ScalarProperty Name="IDGig" ColumnName="IDGig" />
+                <ScalarProperty Name="IDLifeCycle" ColumnName="IDLifeCycle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LookupTypes">
+            <EntityTypeMapping TypeName="GIGModel.LookupType">
+              <MappingFragment StoreEntitySet="LookupType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDLookupType" ColumnName="IDLookupType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="GIGModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDCompany" ColumnName="IDCompany" />
+                <ScalarProperty Name="IDProject" ColumnName="IDProject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tabs">
+            <EntityTypeMapping TypeName="GIGModel.Tab">
+              <MappingFragment StoreEntitySet="Tab">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Tab1" ColumnName="Tab" />
+                <ScalarProperty Name="IDTab" ColumnName="IDTab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDFDefinitions">
+            <EntityTypeMapping TypeName="GIGModel.UDFDefinition">
+              <MappingFragment StoreEntitySet="UDFDefinition">
+                <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
+                <ScalarProperty Name="IDLookupType" ColumnName="IDLookupType" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="IDUDFType" ColumnName="IDUDFType" />
+                <ScalarProperty Name="IDProject" ColumnName="IDProject" />
+                <ScalarProperty Name="IDWorkflow" ColumnName="IDWorkflow" />
+                <ScalarProperty Name="IDUDFDefinition" ColumnName="IDUDFDefinition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDFInstances">
+            <EntityTypeMapping TypeName="GIGModel.UDFInstance">
+              <MappingFragment StoreEntitySet="UDFInstance">
+                <ScalarProperty Name="Val1" ColumnName="Val1" />
+                <ScalarProperty Name="IDUDFDefinition" ColumnName="IDUDFDefinition" />
+                <ScalarProperty Name="IDGig" ColumnName="IDGig" />
+                <ScalarProperty Name="IDUDFInstance" ColumnName="IDUDFInstance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDFTemplates">
+            <EntityTypeMapping TypeName="GIGModel.UDFTemplate">
+              <MappingFragment StoreEntitySet="UDFTemplate">
+                <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
+                <ScalarProperty Name="IDLookupType" ColumnName="IDLookupType" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="IDUDFType" ColumnName="IDUDFType" />
+                <ScalarProperty Name="IDWorkflow" ColumnName="IDWorkflow" />
+                <ScalarProperty Name="IDUDFTemplate" ColumnName="IDUDFTemplate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDFTypes">
+            <EntityTypeMapping TypeName="GIGModel.UDFType">
+              <MappingFragment StoreEntitySet="UDFType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDUDFType" ColumnName="IDUDFType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDFValidations">
+            <EntityTypeMapping TypeName="GIGModel.UDFValidation">
+              <MappingFragment StoreEntitySet="UDFValidation">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IDUDFValidationDefinition" ColumnName="IDUDFValidationDefinition" />
+                <ScalarProperty Name="IDUDFDefinition" ColumnName="IDUDFDefinition" />
+                <ScalarProperty Name="IDUDFValidation" ColumnName="IDUDFValidation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDFValidationDefinitions">
+            <EntityTypeMapping TypeName="GIGModel.UDFValidationDefinition">
+              <MappingFragment StoreEntitySet="UDFValidationDefinition">
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ValidationType" ColumnName="ValidationType" />
+                <ScalarProperty Name="IDUDFValidationDefinition" ColumnName="IDUDFValidationDefinition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GIGModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PhoneCell" ColumnName="PhoneCell" />
+                <ScalarProperty Name="PhoneWork" ColumnName="PhoneWork" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IDContractor" ColumnName="IDContractor" />
+                <ScalarProperty Name="IDCompany" ColumnName="IDCompany" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserXProjectXWorkFlowUserGroups">
+            <EntityTypeMapping TypeName="GIGModel.UserXProjectXWorkFlowUserGroup">
+              <MappingFragment StoreEntitySet="UserXProjectXWorkFlowUserGroup">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IDWorkFlowUserGroup" ColumnName="IDWorkFlowUserGroup" />
+                <ScalarProperty Name="IDProject" ColumnName="IDProject" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDUPW" ColumnName="IDUPW" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workflows">
+            <EntityTypeMapping TypeName="GIGModel.Workflow">
+              <MappingFragment StoreEntitySet="Workflow">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IDProjectTemplate" ColumnName="IDProjectTemplate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDWorkflow" ColumnName="IDWorkflow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkFlowUserGroups">
+            <EntityTypeMapping TypeName="GIGModel.WorkFlowUserGroup">
+              <MappingFragment StoreEntitySet="WorkFlowUserGroup">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDWorkFlow" ColumnName="IDWorkFlow" />
+                <ScalarProperty Name="IDWorkFlowUserGroup" ColumnName="IDWorkFlowUserGroup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

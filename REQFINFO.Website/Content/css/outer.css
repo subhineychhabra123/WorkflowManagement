@@ -1,0 +1,192 @@
+﻿/*.selectedHeader {
+    color: #f3797f !important;
+    font-family: BrandonGrotesque-Bold;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 0.6px;
+}*/
+.file-uploader {
+    -moz-appearance: none;
+    background-color: white;
+    opacity: 0.8;
+    height: 44px;
+}
+
+form .custome-datepicker {
+    padding-bottom: 0px;
+}
+
+.wizard li {
+    margin-right: 2px;
+}
+
+.alert-success {
+    color: green;
+}
+
+
+
+.custom-alert-dismissable,
+.custom-alert-dismissible {
+    padding-right: 7px;
+}
+
+    .custom-alert-dismissable .closeButton,
+    .custom-alert-dismissible .closeButton {
+        position: relative;
+        top: -2px;
+        right: -1334px;
+        color: inherit;
+    }
+
+.selectedHeader {
+    color: #434345;
+    opacity: .3;
+    padding-top: 10px;
+    -o-transition: .1s;
+    -ms-transition: .1s;
+    -moz-transition: .1s;
+    -webkit-transition: .1s;
+    transition: .1s;
+    text-decoration: none;
+}
+
+#UserRegistrationTab:focus, #BusinessRegistrationTab:focus {
+    color: #F3797F;
+    opacity: 1;
+    padding-top: 10px;
+    -o-transition: .1s;
+    -ms-transition: .1s;
+    -moz-transition: .1s;
+    -webkit-transition: .1s;
+    outline: none;
+    transition: .1s;
+    text-decoration: none;
+}
+
+#UserRegistrationTab:hover, #BusinessRegistrationTab:hover {
+    opacity: 1;
+    color: #F3797F;
+    text-decoration: none;
+}
+
+.errorMessages {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-family: BrandonGrotesque-Regular;
+    font-weight: normal;
+    font-style: normal;
+    color: #F3797F;
+    padding-left: 155px;
+}
+.stepTwoErrorMessages
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-family: BrandonGrotesque-Regular;
+    font-weight: normal;
+    font-style: normal;
+    color: #F3797F;
+}
+
+.loginErrorMessages {
+    font-size: 20px;
+    font-family: BrandonGrotesque-Regular;
+    font-weight: normal;
+    font-style: normal;
+    color: #F3797F;
+}
+
+
+.submit {
+    border: 0px;
+    padding-left: 16px;
+    padding-right: 14px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 35px;
+    margin-top: 12px;
+    font-size: 24px;
+    font-family: BrandonGrotesque-Medium;
+    font-weight: normal;
+    font-style: normal;
+    outline: none;
+    color: white;
+    background-color: #F3797F;
+    -o-transition: .1s;
+    -ms-transition: .1s;
+    -moz-transition: .1s;
+    -webkit-transition: .1s;
+    transition: .1s;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: auto;
+}
+
+    .submit:hover {
+        opacity: .8;
+    }
+
+.registrationButton {
+    line-height: 26px;
+}
+
+.multiSelect .button {
+    border: 1px solid white;
+    text-align: left;
+    -moz-appearance: none;
+    border: 0 none;
+    border-radius: 5px;
+    color: #434345;
+    font-family: BrandonGrotesque-Light;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    min-height: 34px !important;
+    outline: medium none;
+    padding-left: 12px;
+    top: 4px;
+    width: 99.62%;
+}
+.btn-upload {
+    background-color: #fff;
+    color: #333;
+    border-color:white !important;
+    text-align: left;
+    width: 299px;
+     font-family: BrandonGrotesque-Light;
+     font-size:20px;
+     height: 28px;
+     padding-top: 0;
+}
+.push{
+    height:54px !important;
+}
+.glyphicon{
+      padding-right: 5px;
+}
+#submitBusiness {
+    background-color: #f3797f;
+    border: 0 none;
+    border-radius: 5px;
+    color: white;
+    font-family: BrandonGrotesque-MediumItalic;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+    height: 35px;
+    margin-left: 0;
+    margin-top: 12px;
+    outline: medium none;
+    padding-left: 16px;
+    padding-right: 14px;
+    transition: all 0.1s ease 0s;
+}
+.forgotsubmit {
+    margin-left: 5px !important;
+}

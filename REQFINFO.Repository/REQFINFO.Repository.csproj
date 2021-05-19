@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96CF78F5-C71D-4278-BCC6-8E7B4C84EF39}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>REQFINFO.Repository</RootNamespace>
+    <AssemblyName>REQFINFO.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttachmentRepository.cs" />
+    <Compile Include="ContractorRepository.cs" />
+    <Compile Include="DataEntity\Attachment.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\Company.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\Contractor.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\CustomLookup.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\Function.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\FunctionXTab.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\GetLevelDetailNextOrPrevious_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\GIG.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\Level.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\LevelXFunction.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\LifeCycle.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\LookupType.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\Project.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\REQFINFOEntity1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetActionsForLoggedInUser_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetActionsOnFirstLevel_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetCreateOption_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetGIGCommunicationLog_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetGIGLogData_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetLevelXFunctionData_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetProjectsList_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetSendto_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetUDFFieldsData_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetUDFFieldsValidations_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\RFI_GetUserWorkflow_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\sp_helpdiagrams_Result.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\Tab.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\UDFDefinition.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\UDFInstance.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\UDFTemplate.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\UDFType.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\UDFValidation.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\UDFValidationDefinition.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\User.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\UserXProjectXWorkFlowUserGroup.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\Workflow.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\WorkFlowUserGroup.cs">
+      <DependentUpon>REQFINFOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LevelXFunctionRepository.cs" />
+    <Compile Include="LevelRepository.cs" />
+    <Compile Include="LifeCycleRepository.cs" />
+    <Compile Include="UDFInstanceRepository.cs" />
+    <Compile Include="UDFValidationDefinitionRepoaitory.cs" />
+    <Compile Include="CustumLookupRepository.cs" />
+    <Compile Include="CreateGigRepoaitory.cs" />
+    <Compile Include="UDFValidationRepository.cs" />
+    <Compile Include="UserXProjectXWorkFlowUserGroupRepository.cs" />
+    <Compile Include="StatusRepository.cs" />
+    <Compile Include="GIGRepository.cs" />
+    <Compile Include="DataEntity\REQFINFOEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>REQFINFOEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataEntity\REQFINFOEntity.Designer.cs">
+      <DependentUpon>REQFINFOEntity.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="FunctionRepository.cs" />
+    <Compile Include="Infrastructure\BaseRepository.cs" />
+    <Compile Include="Infrastructure\Contract\IBaseRepository.cs" />
+    <Compile Include="Infrastructure\Contract\IDbRepository.cs" />
+    <Compile Include="Infrastructure\Contract\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="ProjectRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserRepository.cs" />
+    <Compile Include="WorkflowRepository.cs" />
+    <Compile Include="WorkFlowUserGroupRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="DataEntity\REQFINFOEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>REQFINFOEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataEntity\REQFINFOEntity.edmx.diagram">
+      <DependentUpon>REQFINFOEntity.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataEntity\REQFINFOEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>REQFINFOEntity.edmx</DependentUpon>
+      <LastGenOutput>REQFINFOEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataEntity\REQFINFOEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>REQFINFOEntity.edmx</DependentUpon>
+      <LastGenOutput>REQFINFOEntity1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\REQFINFO.Utility\REQFINFO.Utility.csproj">
+      <Project>{6b0b5029-de4b-483d-a65f-000979e8113a}</Project>
+      <Name>REQFINFO.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,158 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select, textarea {
+    max-width: 280px;
+}
+
+.fullwidth-textarea {
+    max-width: 100%;
+}
+
+.underconstruction {
+    width: 100%;
+    height: 100%;
+}
+
+    .underconstruction .background {
+        background-image: url("/content/images/undercontruction_.jpg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        height: 500px;
+    }
+
+.outerbox {
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+.innerbox {
+    border-top: 1px solid #D0D0D0;
+    border-bottom: 1px solid #D0D0D0;
+    min-height: 70px;
+    margin-bottom: 5px;
+}
+
+.heading {
+    border-bottom: 1px solid #CCCCCC;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.innertext {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.required:after {
+    content: "*";
+    font-weight: bold;
+    color: red;
+}
+
+.innerbox-content {
+    margin: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.ui-datepicker-title {
+    color: black;
+}
+
+.blog-text {
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.25;
+}
+
+.btn-group .gem {
+    background: none repeat scroll 0 0 #e04c4c;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: normal;
+    left: 10px;
+    line-height: 16px;
+    width:16px;
+    padding: 0 5px;
+    position: absolute;
+    text-indent: 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+    top: 10px;
+}
+
+
+.loader-background {
+    background-image: url("/Content/images/ajax-loader.gif");
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 150px;
+}
+
+.ta-editor {
+    margin-top: 1px;
+    min-height: 150px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+#primaryPic .ajax-file-upload-statusbar {
+    width: 270px;
+}
+
+#firstPic .ajax-file-upload-progress {
+    width: 80px;
+}
+
+#secondPic .ajax-file-upload-progress {
+    width: 80px;
+}
+
+#thirdPic .ajax-file-upload-progress {
+    width: 80px;
+}
+
+#fourthPic .ajax-file-upload-progress {
+    width: 80px;
+}
+
+
+#firstPic .ajax-file-upload-filename {
+    font-size: 10px;
+}
+
+#secondPic .ajax-file-upload-filename {
+    font-size: 10px;
+}
+
+#thirdPic .ajax-file-upload-filename {
+    font-size: 10px;
+}
+
+#fourthPic .ajax-file-upload-filename {
+    font-size: 10px;
+}

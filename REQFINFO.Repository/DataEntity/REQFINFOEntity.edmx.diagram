@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="acef9674f5204744aa59ffa471c7e4d5" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="GIGModel.Attachment" Width="1.5" PointX="13" PointY="16.125" />
+        <EntityTypeShape EntityType="GIGModel.Company" Width="1.5" PointX="1.5" PointY="20.75" />
+        <EntityTypeShape EntityType="GIGModel.Contractor" Width="1.5" PointX="6.25" PointY="3.5" />
+        <EntityTypeShape EntityType="GIGModel.CustomLookup" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="GIGModel.Function" Width="1.5" PointX="5.25" PointY="24.125" />
+        <EntityTypeShape EntityType="GIGModel.FunctionXTab" Width="1.5" PointX="5.25" PointY="28.625" />
+        <EntityTypeShape EntityType="GIGModel.GIG" Width="1.5" PointX="8.5" PointY="13.375" />
+        <EntityTypeShape EntityType="GIGModel.Level" Width="1.5" PointX="5.25" PointY="18.25" />
+        <EntityTypeShape EntityType="GIGModel.LevelXFunction" Width="1.5" PointX="7.5" PointY="18" />
+        <EntityTypeShape EntityType="GIGModel.LifeCycle" Width="1.5" PointX="10.75" PointY="15" />
+        <EntityTypeShape EntityType="GIGModel.LookupType" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="GIGModel.Project" Width="1.5" PointX="0.75" PointY="16.625" />
+        <EntityTypeShape EntityType="GIGModel.Tab" Width="1.5" PointX="3" PointY="24.5" />
+        <EntityTypeShape EntityType="GIGModel.UDFDefinition" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="GIGModel.UDFInstance" Width="1.5" PointX="8.25" PointY="10" />
+        <EntityTypeShape EntityType="GIGModel.UDFTemplate" Width="1.5" PointX="6" PointY="9.5" />
+        <EntityTypeShape EntityType="GIGModel.UDFType" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="GIGModel.UDFValidation" Width="1.5" PointX="8.25" PointY="7" />
+        <EntityTypeShape EntityType="GIGModel.UDFValidationDefinition" Width="1.5" PointX="6" PointY="6.125" />
+        <EntityTypeShape EntityType="GIGModel.User" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="GIGModel.UserXProjectXWorkFlowUserGroup" Width="1.5" PointX="5.25" PointY="14.625" />
+        <EntityTypeShape EntityType="GIGModel.Workflow" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="GIGModel.WorkFlowUserGroup" Width="1.5" PointX="3" PointY="14.75" />
+        <AssociationConnector Association="GIGModel.FK_Attachment_LifeCycle" />
+        <AssociationConnector Association="GIGModel.FK_Project_Company" />
+        <AssociationConnector Association="GIGModel.FK_User_Company" />
+        <AssociationConnector Association="GIGModel.FK_GIG_Contractor" />
+        <AssociationConnector Association="GIGModel.FK_User_Contractor" />
+        <AssociationConnector Association="GIGModel.FK_CustomLookup_LookupType" />
+        <AssociationConnector Association="GIGModel.FK_Function_Tab" />
+        <AssociationConnector Association="GIGModel.FK_LevelXFunction_Function" />
+        <AssociationConnector Association="GIGModel.FK_FunctionXTab_Tab" />
+        <AssociationConnector Association="GIGModel.FK_GIG_UserXProjectXWorkFlowUserGroup" />
+        <AssociationConnector Association="GIGModel.FK_LifeCycle_GIG" />
+        <AssociationConnector Association="GIGModel.FK_UDFInstance_GIG" />
+        <AssociationConnector Association="GIGModel.FK_Level_WorkFlowUserGroup" />
+        <AssociationConnector Association="GIGModel.FK_LevelXFunction_Level" />
+        <AssociationConnector Association="GIGModel.FK_LifeCycle_Level" />
+        <AssociationConnector Association="GIGModel.FK_LevelXFunction_LevelXFunction" />
+        <AssociationConnector Association="GIGModel.FK_LifeCycle_LevelXFunction" />
+        <AssociationConnector Association="GIGModel.FK_LifeCycle_User" />
+        <AssociationConnector Association="GIGModel.FK_LifeCycle_User1" />
+        <AssociationConnector Association="GIGModel.FK_LifeCycle_User2" />
+        <AssociationConnector Association="GIGModel.FK_UDFDefinition_LookupType" />
+        <AssociationConnector Association="GIGModel.FK_UDFTemplate_LookupType" />
+        <AssociationConnector Association="GIGModel.FK_UDFDefinition_Project" />
+        <AssociationConnector Association="GIGModel.FK_UserXProjectXWorkFlowUserGroup_Project" />
+        <AssociationConnector Association="GIGModel.FK_UDFDefinition_UDFType" />
+        <AssociationConnector Association="GIGModel.FK_UDFDefinition_Workflow" />
+        <AssociationConnector Association="GIGModel.FK_UDFInstance_UDFDefinition" />
+        <AssociationConnector Association="GIGModel.FK_UDFValidation_UDFDefinition" />
+        <AssociationConnector Association="GIGModel.FK_UDFTemplate_UDFType1" />
+        <AssociationConnector Association="GIGModel.FK_UDFTemplate_Workflow" />
+        <AssociationConnector Association="GIGModel.FK_UDFValidation_UDFValidationDefinition" />
+        <AssociationConnector Association="GIGModel.FK_UserXProjectXWorkFlowUserGroup_User" />
+        <AssociationConnector Association="GIGModel.FK_UserXProjectXWorkFlowUserGroup_WorkFlowUserGroup" />
+        <AssociationConnector Association="GIGModel.FK_WorkFlowUserGroup_Workflow" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

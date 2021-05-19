@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B15F15CF-6470-471B-B0F6-CDAD595D9FCA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>REQFINFO.Domain</RootNamespace>
+    <AssemblyName>REQFINFO.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttachmentModel.cs" />
+    <Compile Include="ContractorModel.cs" />
+    <Compile Include="LevelModel.cs" />
+    <Compile Include="LevelXFunctionModel.cs" />
+    <Compile Include="LifeCycleModel.cs" />
+    <Compile Include="UDFInstanceModel.cs" />
+    <Compile Include="UDFValidationDefinitionModel.cs" />
+    <Compile Include="UDFFieldsValidationsModel.cs" />
+    <Compile Include="CustomLookupModel.cs" />
+    <Compile Include="CreateGigModel.cs" />
+    <Compile Include="StatusModel.cs" />
+    <Compile Include="ForgotPasswordModel.cs" />
+    <Compile Include="GIGModel.cs" />
+    <Compile Include="FunctionModel.cs" />
+    <Compile Include="ProjectModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserModel.cs" />
+    <Compile Include="UserXProjectXWorkFlowUserGroupModel.cs" />
+    <Compile Include="WorkFlowModel.cs" />
+    <Compile Include="WorkFlowUserGroupModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\REQFINFO.Utility\REQFINFO.Utility.csproj">
+      <Project>{6b0b5029-de4b-483d-a65f-000979e8113a}</Project>
+      <Name>REQFINFO.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

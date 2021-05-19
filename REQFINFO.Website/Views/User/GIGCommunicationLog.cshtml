@@ -1,0 +1,220 @@
+﻿@model   REQFINFO.Website.Models.UserXProjectXWorkFlowUserGroupVM
+@{
+    ViewBag.Title = "GIGCommunicationLog";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+<script src="~/Scripts/Controllers/GIGCommunicationLogController.js"></script>
+@*<script src="~/Scripts/Controllers/CustomElement.js"></script>*@
+<div class="main-content" ng-app="GIGLogApp">
+    <div class="container" ng-controller="GIGLogCtlr" ng-init="GIGInitializer('@ViewBag.IDUPW','@ViewBag.IDProject', '@ViewBag.IDWorkflowUerGroup')">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-content">
+                    <div class="theme-title">
+                        <div class="theme-title-border">
+                            <i class="fa fa-file-text-o"></i><span>@Model.WorkflowDisplayName > @Model.ProjectName</span>
+                        </div>
+                    </div>
+                    <div class="white-area">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="gig-chart">
+                                    <div class="title">Total @Model.WorkflowDisplayName</div>
+                                    <div class="box">
+                                        <div class="box-content green">
+                                            {{AllGIGCount}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="gig-chart">
+                                    <div class="title">Open @Model.WorkflowDisplayName</div>
+                                    <div class="box">
+                                        <div class="box-content brown">
+                                            {{tabOpenCount}}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="gig-chart">
+                                    <div class="title">Late @Model.WorkflowDisplayName</div>
+                                    <div class="box">
+                                        <div class="box-content blue">
+                                            {{tabCloseCount }}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="theme-nav-tabs spacer-top-30">
+
+
+
+                            @* <li class="active"><a data-toggle="tab" href="#open">Open</a></li>		*@
+                            <ul class="nav nav-tabs">
+
+                                <li ng-repeat="TabsListObj in TabsList " ng-class="(TabsList=$first) ? 'active' : ''">
+
+                                    <a data-toggle="tab" ng-click="GetdataWithStatus(TabsListObj.IDTab)" href="#new">{{TabsListObj.Tab1}}</a>
+
+                                </li>
+
+                                <li><a data-toggle="tab" ng-click="GetdataWithStatus(0)" href="#open">All</a></li>
+                            </ul>
+
+
+                            <div class="tab-content">
+
+                                <div class="">
+                                    <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+
+                                          
+                                            <div class="col-sm-4"> <select class="form-control" ng-model="Searchby" ng-change="FilterGIGLogs()">
+                                                        <option value="">Select Category</option>
+                                                        <option value="Number1">Number</option>
+                                                        <option value="Detail">Description</option>
+                                                        <option value="Sequence">Level</option>
+                                                        <option value="LoggedBy">Logged By</option>
+                                                        <option value="OwnedBy">Owned By</option>
+                                                        <option value="AssignedBy">Assigned To</option>
+                                                        <option value="DateCreated">Date</option>
+                                                        <option value="DateRequired">Required By </option>
+                                                        <option value="PastTenseFunction">Status</option>
+                                                    </select></div>
+
+                                              <div class="col-sm-6 pl-none">
+                                                <input type="text" class="form-control form-control-search" placeholder="Search..." ng-model="Search" ng-change="FilterGIGLogs()">
+
+                                            
+                                                <div class="col-sm-2"></div>
+                                                <button class="btn btn-search" type="button" ng-click="SearchGIGLogs()"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                        <div class="col-sm-5"  >
+                                                   
+                                                </div>
+                                </div>
+
+                                <div ng-if="Projects.length === 0" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
+                                    <span class="Emptymsg">No Record Found  </span>
+
+
+
+
+                                </div>
+
+
+
+                                <div id="open" class="tab-pane fade in active" ng-if="Projects.length != 0">
+
+
+                                    <div class="table-overflow">
+                                        <table class="table table-bordered table-striped">
+
+                                            <thead>
+
+                                                <tr>
+                                                    <th ng-click="Sort('Number1',!sortOrder)">Number<span class="pull-right"><i id="asc-sort-Id" style="display: none"></i><i id="desc-sort-Id" class="fa fa-sort"></i></span></th>
+                                                    <th ng-click="Sort('Detail',!sortOrder)"><span class="">Description</span></th>
+                                                    <th ng-click="Sort('Detail',!sortOrder)"><span class="table-width-150">Level</span></th>
+                                                    <th>Logged By</th>
+                                                    <th>Owned By</th>
+                                                    <th>Assigned To</th>
+                                                    <th ng-click="Sort('DateCreated',!sortOrder)"><span>Date</span><span class="pull-right"><i id="asc-sort-Id" style="display: none"></i><i id="desc-sort-Id" class="fa fa-sort"></i></span></th>
+                                                    </th>
+                                                     <th ng-click="Sort('DateRequired',!sortOrder)"><span>Required By </span><span class="pull-right"><i id="asc-sort-Id" style="display: none"></i><i id="desc-sort-Id" class="fa fa-sort"></i></span></th>
+                                                    </th>
+                                                      <th>Status</th>
+                                                    <th>Trigger</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr ng-repeat="ProjectsObj in Projects |orderBy:orderByField:reverseSort | filter:search" ng-class="{  'active':$index == selectedRow }" ng-click="setClickedRow($index,ProjectsObj.IDGig,ProjectsObj.IDFunctionTrigger)">
+                                                    <td>{{ProjectsObj.Number}}</td>
+                                                    <td>{{ProjectsObj.Detail}}</td>
+                                                    <td>{{ProjectsObj.Sequence}}</td>
+                                                    <td>{{ProjectsObj.LoggedBy}}</td>
+                                                    <td>{{ProjectsObj.OwnedBy}}</td>
+                                                    <td>{{ProjectsObj.AssignedBy}}</td>
+                                                    <td>{{ProjectsObj.DateCreated.slice(6, -2) | date: 'MM-dd-yyyy'  }} </td>
+                                                    <td>{{ProjectsObj.DateRequired.slice(6, -2) | date: 'MM-dd-yyyy'  }}</td>
+                                                    <td>{{ProjectsObj.PastTenseFunction}}</td>
+
+                                                     <td>{{ProjectsObj.GIGDirection}}</td>
+                                                
+                                                </tr>
+
+
+
+                                            </tbody>
+                                        </table>
+                                        <div paging page="currentPage" page-size="PageSize" show-prev-next="true" dots="..." hide-if-empty="true" total="TotalRecords" paging-action="GetOrganizationByPage('Paging Clicked', page, pageSize, total)"></div>
+
+                                    </div>
+                                </div>
+
+                                <div class="footer-buttons">
+                                   
+
+                                    <a ng-href="{{ActionsObj.Enable==true ? ActionsObj.Name =='Create'  ?'/CreateGIG/'+hdnIDUPW+'/'+IDProject+'/'+ActionsObj.IDLevelXFunction : '/ProccessGIG/'+IDGIG+'/'+ActionsObj.IDLevelXFunction + '/' +IDFunctionTrigger :''}}" ng-class="ActionsObj.IsAlignedLeft ? 'btn btn-theme btn-md marginRt5 pull-left' : 'btn btn-theme btn-md marginRt5 pull-right'"
+                                        ng-repeat="ActionsObj in  AllActions " ng-disabled="!ActionsObj.Enable" ng-if="Projects.length != 0 ">{{ActionsObj.Name}} 
+                                    </a>
+                                      <a href="#" ng-href="{{'/ProccessGIG/'+IDGIG}}" class="btn btn-theme btn-md marginRt5 pull-right" ng-if="Projects.length != 0">View</a>
+                                   
+
+
+                                @*    <a href="#" ng-href="{{'/CreateGIG/'+hdnIDUPW+'/'+IDProject+'/'+levelXFunctionID }}" class="btn btn-theme btn-md marginRt5"  >Create</a>*@
+
+                                       <a href="#" ng-href="{{'/CreateGIG/'+hdnIDUPW+'/'+IDProject+'/'+levelXFunctionID }}" class="btn btn-theme btn-md marginRt5"  ng-repeat="intialFirstlevelBtnObj in  intialFirstlevelBtn"  ng-if="intialFirstlevelBtn.length != 0">{{intialFirstlevelBtnObj.Name}}</a>
+                                    
+                                  @*  ng-if="Actions.length == 0 && intialFirstlevelBtn.length != 0 && Projects ==0"*@
+                                    
+                                    
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        &copy; copyrights 2015 reqfinfo.com
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Pricacy</a></li>
+                            <li><a href="#">Terms</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <div class="clearfix"></div>
+
+
+
+
+        <script src="js/reqfinfo-theme.js"></script>

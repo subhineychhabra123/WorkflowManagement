@@ -1,0 +1,59 @@
+﻿@media (max-width: 767px) {
+    .Logoutli {
+        display: block;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        white-space: nowrap;
+        color: #fff !important;
+        padding: 10px 15px 10px 15px;
+        font-size: 13px;
+    }
+
+        .Logoutli:hover, .Logoutli:focus {
+            background-color: #015095;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+}
+
+@media (min-width: 768px) {
+    .Logoutli {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+    }
+
+        .Logoutli:hover, .Logoutli:focus {
+            background-color: #F5F5F5;
+            color: #262626;
+            text-decoration: none;
+            cursor: pointer;
+        }
+}
+
+
+.tooltip {
+    padding: 4px;
+    margin: 0px auto;
+}
+
+.Emptymsg {
+    font-weight: bold;
+}
+
+.alert-theme {
+    top: 25px;
+    right: 25px;
+}
+.error {
+    color:red;
+}
+.marginRt5 {
+    margin-right:5px;
+}

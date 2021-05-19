@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+<div class="keyword-search">
+    <span class="label-textbox">{{ParameterName}}:</span>
+    <div class="textbox-wrapper" id="{{UniqueId}}">
+        <div class="controls" style="float:left;" ng-repeat="item in ParameterData">
+            <label class="checkbox">
+                <input id="radio" type="radio"  ng-click="$parent.$parent.CheckElement(item,ReportParameterID,true)" class="{{UniqueId}}">{{item.name}}
+            </label>
+        </div>
+    </div>
+</div>
+<span class="msg-validation" ng-if="Mandatory">
+    <span data-valmsgfor="{{UniqueId}}">{{ParameterName}} field is required.</span>
+</span>
+</body>
+</html>
